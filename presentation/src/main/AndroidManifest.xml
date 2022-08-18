@@ -13,8 +13,6 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".features.main.MainActivity"
-            android:windowSoftInputMode="adjustPan"/>
 
     </application>
 

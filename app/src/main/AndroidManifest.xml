@@ -4,7 +4,9 @@
     package="com.julianparrilla.dragonbooker">
 
     <application
-        android:allowBackup="true"
+        android:name=".BaseApp"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
         android:supportsRtl="true"
         tools:targetApi="31"
         tools:ignore="MissingApplicationIcon">

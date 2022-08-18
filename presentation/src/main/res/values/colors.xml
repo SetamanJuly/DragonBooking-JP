@@ -2,14 +2,8 @@
 <resources>
 
     <color name="colorPrimary">@android:color/white</color>
-    <color name="colorPrimaryDark">@color/marvel_red</color>
+    <color name="colorPrimaryDark">@color/colorAccent</color>
     <color name="colorAccent">@android:color/black</color>
     <color name="default_background_color">#EEEEEE</color>
-
-    <color name="marvel_red">#ED1D24</color>
-    <color name="text_card_color">#FFF</color>
-    <color name="default_background">#fff</color>
-    <color name="transparency_background_loading">#4AFF9800</color>
-
 
 </resources>

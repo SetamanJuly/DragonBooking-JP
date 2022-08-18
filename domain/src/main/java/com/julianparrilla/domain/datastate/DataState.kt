@@ -1,6 +1,4 @@
-package com.babel.marvel.domain.datastate
-
-import com.julianparrilla.domain.datastate.StateMessage
+package com.julianparrilla.domain.datastate
 
 sealed class DataState<T>(
     var loading: Boolean,

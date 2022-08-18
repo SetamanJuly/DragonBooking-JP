@@ -1,6 +1,7 @@
 object LibraryDependency {
     object Version {
-        const val KOIN = "3.0.1"
+        const val KOIN = "3.2.0"
+        const val ARROW = "1.0.1"
 
 
         const val RECYCLER_LIB = "1.2.0-beta01"
@@ -44,11 +45,17 @@ object LibraryDependency {
 
     //KOIN
     const val KOIN = "io.insert-koin:koin-core:${Version.KOIN}"
+    const val KOIN_ANDROID = "io.insert-koin:koin-android:3.2.0"
 
     //CACHE
     const val ROOM_RUNTIME = "androidx.room:room-runtime:${Version.ROOM}"
     const val ROOM_COMPILER = "androidx.room:room-compiler:${Version.ROOM}"
     const val ROOM_KTX = "androidx.room:room-ktx:${Version.ROOM}"
+
+    //ARROW
+    const val ARROW_FX = "io.arrow-kt:arrow-fx-coroutines:${Version.ARROW}"
+    const val ARROW_OPTICS = "io.arrow-kt:arrow-optics:${Version.ARROW}"
+    const val ARROW_META = "io.arrow-kt:arrow-meta:${Version.ARROW}"
 
     //REMOTE
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Version.RETROFIT}"

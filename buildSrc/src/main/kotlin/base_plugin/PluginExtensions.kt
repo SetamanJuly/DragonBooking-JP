@@ -51,4 +51,8 @@ internal fun Project.configureAndroidApp() = this.extensions.getByType<AndroidBa
 internal fun Project.configureDependencies() = this.dependencies {
     add("implementation", LibraryDependency.KOTLIN_STD)
     add("implementation", LibraryDependency.KOIN)
+    add("implementation", LibraryDependency.KOIN_ANDROID)
+    add("implementation", LibraryDependency.ARROW_FX)
+    add("implementation", LibraryDependency.ARROW_META)
+    add("implementation", LibraryDependency.ARROW_OPTICS)
 }

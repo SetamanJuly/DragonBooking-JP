@@ -1,12 +1,8 @@
-object CoreVersion{
+object CoreVersion {
     const val KOTLIN = "1.7.0"
     const val NAVIGATION = "2.5.1"
     const val ANDROID_GRADLE = "7.2.1"
     const val KTLINT_GRADLE = "10.3.0"
-
-
-
-
 
 
     const val KTLINT = "0.40.0"
@@ -16,12 +12,12 @@ object CoreVersion{
 
 object GradlePluginId {
     const val ANDROID_APP = "com.android.application"
-    const val ANDROID_LIB  = "com.android.library"
+    const val ANDROID_LIB = "com.android.library"
     const val ANDROID = "kotlin-android"
     const val SAFE_ARGS = "androidx.navigation.safeargs"
     const val BASE_GRADLE_PLUGIN = "base-gradle-plugin"
     const val KTLINT_GRADLE = "org.jlleitschuh.gradle.ktlint"
-    const val KTLINT_MAVEN =  "https://plugins.gradle.org/m2/"
+    const val KTLINT_MAVEN = "https://plugins.gradle.org/m2/"
     const val DETEKT = "io.gitlab.arturbosch.detekt"
     const val VERSIONS_PLUGIN = "com.github.ben-manes.versions"
 }

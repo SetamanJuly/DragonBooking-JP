@@ -8,5 +8,6 @@ dependencies {
     implementation(LibraryDependency.RETROFIT_INTERCEPTOR)
     implementation(LibraryDependency.COLLECTION_KTX)
     implementation(LibraryDependency.KOIN)
+    implementation(LibraryDependency.ARROW_FX)
     implementation(project(ModulesDependency.DATA))
 }
