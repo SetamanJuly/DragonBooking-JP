@@ -1,5 +1,6 @@
 package com.julianparrilla.data.repository
 
+import arrow.core.Either
 import arrow.core.right
 import com.julianparrilla.data.datasource.cache.DragonsCacheDataSource
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
@@ -9,6 +10,7 @@ import com.julianparrilla.data.utils.toQuery
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.utils.Return
 import com.julianparrilla.domain.model.DragonsDataState
+import com.julianparrilla.domain.model.NetworkError
 import com.julianparrilla.domain.repository.DragonsRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -66,6 +68,21 @@ class DragonsRepositoryImpl(
                     dragonsCacheDataSource.insertCharacters(resultsEntity = networkObject)
                 }
 
+            }.result
+        )
+    }
+
+    override fun getOriginAndDestinations(): Flow<Return<Pair<List<String>, List<String>>>> = flow {
+        emitAll(
+            object : NetworkBoundResource<Pair<List<String>, List<String>>, Pair<List<String>, List<String>>, Pair<List<String>, List<String>>>(
+                IO,
+                cacheCall = {
+                    dragonsCacheDataSource.getOriginAndDestinations()
+                }
+            ) {
+                override suspend fun handleCacheSuccess(response: Pair<List<String>, List<String>>?): Either<NetworkError, Pair<List<String>, List<String>>>? {
+                    return response?.right()
+                }
             }.result
         )
     }

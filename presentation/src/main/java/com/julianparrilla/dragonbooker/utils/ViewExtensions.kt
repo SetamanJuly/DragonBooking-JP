@@ -17,3 +17,8 @@ fun View.gone() {
 fun View.visibleOrGone(visible: Boolean) {
     if (visible) visible() else gone()
 }
+
+infix fun <T : View> T.onClick(f: (T) -> Unit) =
+    setOnClickListener(
+        SafeClickListener { f(this) }
+    )

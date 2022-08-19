@@ -10,7 +10,7 @@ import org.koin.dsl.module
 @ExperimentalCoroutinesApi
 val fragmentModule = module {
 
-    factory { HomeStore(get(), get(), get()) }
+    factory { HomeStore(get(), get(), get(), get()) }
     factory { HomeFragment() }
 
 }

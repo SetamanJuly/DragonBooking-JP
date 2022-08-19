@@ -48,6 +48,13 @@ class DragonsCacheDataSourceImpl(
         return dragonsDao.getFilteredData(SimpleSQLiteQuery(query.first, query.second.toTypedArray()))?.toData()
     }
 
+    override suspend fun getOriginAndDestinations(): Pair<List<String>, List<String>>? {
+        return Pair(
+            dragonsDao.getOrigins(),
+            dragonsDao.getDestinations()
+        )
+    }
+
     fun List<CachedResponseAllDragons>.toData() : DragonsModel =
         DragonsModel(
             results = map {

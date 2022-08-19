@@ -12,4 +12,6 @@ interface DragonsCacheDataSource {
 
     suspend fun getFilteredDragons(query: Pair<String, MutableList<String>>): DragonsModel?
 
+    suspend fun getOriginAndDestinations(): Pair<List<String>, List<String>>?
+
 }

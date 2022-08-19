@@ -7,32 +7,41 @@ import com.julianparrilla.domain.model.PriceSort
 
 typealias Return<A> = Either<NetworkError, A>
 
-fun DragonFilterParams.toQuery() : Pair<String, MutableList<String>> {
+fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
 
     var query = "SELECT * FROM dragonBooking"
     var containsConditions = false
     val args: MutableList<String> = mutableListOf()
 
-    if(!name.isNullOrEmpty()){
-        query += " WHERE"
-        query += " outboundDestination LIKE ?%"
-        containsConditions = true
-        args.add(name!!)
+    originDestination?.let {
+        if (it.first.isNotEmpty()) {
+            query += " WHERE"
+            query += " inbound_origin=?"
+            containsConditions = true
+            args.add(it.first)
+        }
+
+        if (it.second.isNotEmpty()) {
+            query += " AND"
+            query += " inbound_destination=?"
+            containsConditions = true
+            args.add(it.second)
+        }
     }
 
-    if(priceSort != PriceSort.NONE){
+    if (priceSort != PriceSort.NONE) {
         if (!containsConditions) {
             containsConditions = true
         }
 
         query += " ORDER BY price"
-        when(priceSort){
+        when (priceSort) {
             PriceSort.ASC -> query += " ASC"
             else -> query += " DESC"
         }
     }
 
-    if(priceRange != null){
+    if (priceRange != null) {
         if (containsConditions) {
             query += " AND"
         } else {

@@ -56,7 +56,7 @@ abstract class Store<A : Action, B : State>(initialState: B) :
         view.run { state.state() }
         launchIO {
             state.collect {
-                Main { view.run { it.render() } }
+                IO { view.run { it.render() } }
             }
         }
     }

@@ -11,4 +11,6 @@ interface DragonsRepository {
 
     fun getFilteredData(params: DragonFilterParams): Flow<Return<DragonsDataState>>
 
+    fun getOriginAndDestinations(): Flow<Return<Pair<List<String>, List<String>>>>
+
 }
