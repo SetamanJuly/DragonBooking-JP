@@ -5,7 +5,7 @@ import arrow.core.right
 import com.julianparrilla.data.datasource.remote.CurrencyRemoteDataSource
 import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.mapper.toDomain
-import com.julianparrilla.data.utils.Return
+import com.julianparrilla.domain.utils.Return
 import com.julianparrilla.domain.model.CurrencyDataState
 import com.julianparrilla.domain.model.NetworkError
 import com.julianparrilla.domain.repository.CurrencyRepository

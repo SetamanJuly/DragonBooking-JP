@@ -1,15 +1,14 @@
 package com.julianparrilla.data.repository
 
-import arrow.core.Either
 import arrow.core.right
-import arrow.core.rightIor
 import com.julianparrilla.data.datasource.cache.DragonsCacheDataSource
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
 import com.julianparrilla.data.entity.DragonsModel
 import com.julianparrilla.data.mapper.toDomain
-import com.julianparrilla.data.utils.Return
+import com.julianparrilla.data.utils.toQuery
+import com.julianparrilla.domain.model.DragonFilterParams
+import com.julianparrilla.domain.utils.Return
 import com.julianparrilla.domain.model.DragonsDataState
-import com.julianparrilla.domain.model.NetworkError
 import com.julianparrilla.domain.repository.DragonsRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +49,28 @@ class DragonsRepositoryImpl(
         )
     }
 
-   //override fun getCharacters(): Flow<DataState<CharactersListViewState>> = flow {
+    override fun getFilteredData(params: DragonFilterParams): Flow<Return<DragonsDataState>> = flow {
+        emitAll(
+            object : NetworkBoundResource<DragonsModel, DragonsModel, DragonsDataState>(
+                IO,
+                cacheCall = {
+                    dragonsCacheDataSource.getFilteredDragons(params.toQuery())
+                }
+            ) {
+
+                override suspend fun handleCacheSuccess(response: DragonsModel?): Return<DragonsDataState>? {
+                    return response?.toDomain()?.right()
+                }
+
+                override suspend fun updateCache(networkObject: DragonsModel) {
+                    dragonsCacheDataSource.insertCharacters(resultsEntity = networkObject)
+                }
+
+            }.result
+        )
+    }
+
+    //override fun getCharacters(): Flow<DataState<CharactersListViewState>> = flow {
    //    emitAll(
    //        object : NetworkBoundResource<DataCharacterEntity, DataCharacterEntity, CharactersListViewState>(
    //            IO,

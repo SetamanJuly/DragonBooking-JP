@@ -10,10 +10,8 @@ class DragonsRemoteDataSourceImpl(
     private val dragonsApiService: DragonsApiService
 ) : DragonsRemoteDataSource {
 
-    override suspend fun characters(): Return<DragonsModel> =
-        dragonsApiService.getDragonList().map {
-            it.toData()
-        }
+    override suspend fun characters(): DragonsModel =
+        dragonsApiService.getDragonList().toData()
 
     override suspend fun singleCharacter(idCharacter: Int): Return<DragonsModel> =
         TODO("Not yet implemented")

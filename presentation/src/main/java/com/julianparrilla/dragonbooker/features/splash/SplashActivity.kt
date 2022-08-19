@@ -1,14 +1,14 @@
 package com.julianparrilla.dragonbooker.features.splash
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.julianparrilla.dragonbooker.base.BaseActivity
 import com.julianparrilla.dragonbooker.databinding.ActivitySplashBinding
+import com.julianparrilla.dragonbooker.features.main.MainActivity
 import com.julianparrilla.dragonbooker.utils.viewBinding
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
@@ -24,8 +24,8 @@ class SplashActivity : BaseActivity() {
     private fun navMainActivity() {
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                //startActivity(Intent(this, MainActivity::class.java))
-                //finish()
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             },
             TIME_OUT
         )

@@ -1,18 +1,22 @@
 package com.julianparrilla.cache.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.julianparrilla.cache.model.CachedResponseAllDragons
 
 @Dao
 interface DragonsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertOrIgnore(cachedResponseAllCharacters: CachedResponseAllDragons)
+    suspend fun addAll(cachedResponseAllCharacters: List<CachedResponseAllDragons>)
 
-    @Query("SELECT * FROM responses")
-    suspend fun getCachedData(): CachedResponseAllDragons?
+    @Query("SELECT * FROM dragonBooking")
+    suspend fun getCachedData(): List<CachedResponseAllDragons>?
+
+    @Query("DELETE FROM dragonBooking")
+    suspend fun deleteAll()
+
+    @RawQuery
+    suspend fun getFilteredData(query: SupportSQLiteQuery):  List<CachedResponseAllDragons>?
 
 }

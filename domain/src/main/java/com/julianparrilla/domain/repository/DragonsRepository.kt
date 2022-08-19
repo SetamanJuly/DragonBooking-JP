@@ -1,12 +1,14 @@
 package com.julianparrilla.domain.repository
 
-import arrow.core.Either
+import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.model.DragonsDataState
-import com.julianparrilla.domain.model.NetworkError
+import com.julianparrilla.domain.utils.Return
 import kotlinx.coroutines.flow.Flow
 
 interface DragonsRepository {
 
-    fun getCharacters(): Flow<Either<NetworkError, DragonsDataState>>
+    fun getCharacters(): Flow<Return<DragonsDataState>>
+
+    fun getFilteredData(params: DragonFilterParams): Flow<Return<DragonsDataState>>
 
 }

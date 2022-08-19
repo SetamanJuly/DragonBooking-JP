@@ -12,8 +12,9 @@ import kotlinx.coroutines.FlowPreview
 @ExperimentalCoroutinesApi
 val koinModules = listOf(
     databaseModule,
-    remoteDragonsModule,
+    asyncModule,
     remoteCurrencyModule,
+    remoteDragonsModule,
     dataModule,
     useCaseModule,
     fragmentModule,

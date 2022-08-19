@@ -1,25 +1,25 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package com.julianparrilla.data.repository
 
 import arrow.core.Either
 import arrow.core.left
-import com.julianparrilla.data.utils.Return
 import com.julianparrilla.domain.model.*
 import com.julianparrilla.domain.utils.CACHE_TIMEOUT
 import com.julianparrilla.domain.utils.NETWORK_TIMEOUT
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.TimeoutCancellationException
+import com.julianparrilla.domain.utils.Return
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import retrofit2.HttpException
 import java.io.IOException
 
 abstract class NetworkBoundResource<NetworkObj, CacheObj, ViewState>(
     private val dispatcher: CoroutineDispatcher,
-    private val apiCall: (suspend () -> Return<NetworkObj>)? = null,
-    val cacheCall: (suspend () -> Return<CacheObj>?)? = null
+    private val apiCall: (suspend () -> NetworkObj)? = null,
+    val cacheCall: (suspend () -> CacheObj?)? = null
 ) {
     val result: Flow<Return<ViewState>> = flow {
         cacheCall?.let {
@@ -30,65 +30,53 @@ abstract class NetworkBoundResource<NetworkObj, CacheObj, ViewState>(
         }
     }
 
-    private suspend fun safeAPICall() = flow {
+    private suspend fun safeAPICall() = channelFlow {
         withContext(dispatcher) {
             kotlin.runCatching {
                 withTimeout(NETWORK_TIMEOUT) {
                     apiCall?.invoke()?.let {
-                        it.fold(
-                            ifRight = { data ->
-                                updateCache(data)
-                                handleNetworkSuccess(data)?.let {
-                                    emit(it)
-                                }
-                            },
-                            ifLeft = {
-                                emit(it.left())
-                            }
-                        )
+                        updateCache(it)
+                        handleNetworkSuccess(it)?.let {
+                            send(it)
+                        }
                     }
                 }
             }.onFailure {
                 when (it) {
                     is TimeoutCancellationException -> {
-                        emit(NetworkTimeOutError.left())
+                        send(NetworkTimeOutError.left())
                     }
                     is IOException -> {
-                        emit(NetworkConnectionError.left())
+                        send(NetworkConnectionError.left())
                     }
                     is HttpException -> {
-                        emit(NetworkParsedError(convertErrorBody(it)).left())
+                        send(NetworkParsedError(convertErrorBody(it)).left())
                     }
                     else -> {
-                        emit(NetworkUnknownError.left())
+                        send(NetworkUnknownError.left())
                     }
                 }
             }
         }
     }
 
-    private suspend fun safeCacheCall() = flow {
+    private suspend fun safeCacheCall() = channelFlow {
         withContext(dispatcher) {
             kotlin.runCatching {
                 withTimeout(CACHE_TIMEOUT) {
-                    cacheCall?.invoke()?.fold(
-                        ifRight = {
-                            handleCacheSuccess(it)?.let {
-                                emit(it)
-                            }
-                        },
-                        ifLeft = {
-                            emit(it.left())
+                    cacheCall?.invoke().let {
+                        handleCacheSuccess(it)?.let {
+                            send(it)
                         }
-                    )
+                    }
                 }
             }.onFailure {
                 when (it) {
                     is TimeoutCancellationException -> {
-                        emit(NetworkTimeOutError.left())
+                        send(NetworkTimeOutError.left())
                     }
                     else -> {
-                        emit(NetworkUnknownError.left())
+                        send(NetworkUnknownError.left())
                     }
                 }
             }

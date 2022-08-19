@@ -1,8 +1,10 @@
 package com.julianparrilla.remote.koin
 
+import com.julianparrilla.data.datasource.remote.CurrencyRemoteDataSource
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
 import com.julianparrilla.remote.service.CurrencyApiService
 import com.julianparrilla.remote.service.DragonsApiService
+import com.julianparrilla.remote.source.CurrencyRemoteDataSourceImpl
 import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -32,8 +34,8 @@ val remoteCurrencyModule = module {
 
     factory { provideCurrencyApi(get()) }
 
-    factory<DragonsRemoteDataSource> {
-        DragonsRemoteDataSourceImpl(
+    factory<CurrencyRemoteDataSource> {
+        CurrencyRemoteDataSourceImpl(
             get()
         )
     }

@@ -1,41 +1,80 @@
 package com.julianparrilla.cache.source
 
-import com.google.gson.Gson
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.julianparrilla.cache.db.DragonsDao
 import com.julianparrilla.cache.model.CachedResponseAllDragons
 import com.julianparrilla.data.datasource.cache.DragonsCacheDataSource
+import com.julianparrilla.data.entity.BoundModel
 import com.julianparrilla.data.entity.DragonsModel
+import com.julianparrilla.data.entity.ResultsModel
 
 class DragonsCacheDataSourceImpl(
     private val dragonsDao: DragonsDao
 ) : DragonsCacheDataSource {
 
     override suspend fun insertCharacters(resultsEntity: DragonsModel) {
-        dragonsDao.insertOrIgnore(
-            CachedResponseAllDragons(
-                response = Gson().toJson(resultsEntity)
-            )
+        dragonsDao.deleteAll()
+        dragonsDao.addAll(
+            resultsEntity.results.map {
+                CachedResponseAllDragons(
+                    price = it.price,
+                    currency = it.currency,
+                    inboundAirline = it.inbound.airline,
+                    inboundImageAirline = it.inbound.airlineImage,
+                    inboundArrivalDate = it.inbound.arrivalDate,
+                    inboundArrivalTime = it.inbound.arrivalTime,
+                    inboundDepartureDate = it.inbound.departureDate,
+                    inboundDepartureTime = it.inbound.departureTime,
+                    inboundDestination = it.inbound.destination,
+                    inboundOrigin = it.inbound.origin,
+                    outboundAirline = it.outbound.airline,
+                    outboundImageAirline = it.outbound.airlineImage,
+                    outboundArrivalDate = it.outbound.arrivalDate,
+                    outboundArrivalTime = it.outbound.arrivalTime,
+                    outboundDepartureDate = it.outbound.departureDate,
+                    outboundDepartureTime = it.outbound.departureTime,
+                    outboundDestination = it.outbound.destination,
+                    outboundOrigin = it.outbound.origin,
+                )
+            }
         )
     }
 
-    override suspend fun searchById(idCharacter: Int): DragonsModel? {
-        val listCached = dragonsDao.getCachedData()?.let {
-            Gson().fromJson(it.response, DragonsModel::class.java)
-        }
-
-        listCached?.let {
-           // it.data.results.firstOrNull { it.id == idCharacter }?.apply {
-           //     it.data.results.clear()
-           //     it.data.results.add(this)
-           // }
-        }
-
-        return listCached
-    }
-
     override suspend fun getAllCharacters(): DragonsModel? {
-        return dragonsDao.getCachedData()?.let {
-            Gson().fromJson(it.response, DragonsModel::class.java)
-        }
+        return dragonsDao.getCachedData()?.toData()
     }
+
+    override suspend fun getFilteredDragons(query: Pair<String, MutableList<String>>): DragonsModel? {
+        return dragonsDao.getFilteredData(SimpleSQLiteQuery(query.first, query.second.toTypedArray()))?.toData()
+    }
+
+    fun List<CachedResponseAllDragons>.toData() : DragonsModel =
+        DragonsModel(
+            results = map {
+                ResultsModel(
+                    price = it.price,
+                    currency = it.currency,
+                    inbound = BoundModel(
+                        airline = it.inboundAirline,
+                        airlineImage = it.inboundImageAirline,
+                        arrivalDate = it.inboundArrivalDate,
+                        arrivalTime = it.inboundArrivalTime,
+                        departureDate = it.inboundDepartureDate,
+                        departureTime = it.inboundDepartureTime,
+                        destination = it.inboundDestination,
+                        origin = it.inboundOrigin
+                    ),
+                    outbound = BoundModel(
+                        airline = it.outboundAirline,
+                        airlineImage = it.outboundImageAirline,
+                        arrivalDate = it.outboundArrivalDate,
+                        arrivalTime = it.outboundArrivalTime,
+                        departureDate = it.outboundDepartureDate,
+                        departureTime = it.outboundDepartureTime,
+                        destination = it.outboundDestination,
+                        origin = it.outboundOrigin
+                    ),
+                )
+            }
+        )
 }
