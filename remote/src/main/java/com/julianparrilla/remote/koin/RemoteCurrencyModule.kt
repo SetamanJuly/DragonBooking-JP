@@ -1,5 +1,11 @@
 package com.julianparrilla.remote.koin
 
+import com.julianparrilla.data.datasource.remote.CurrencyRemoteDataSource
+import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
+import com.julianparrilla.remote.service.CurrencyApiService
+import com.julianparrilla.remote.service.DragonsApiService
+import com.julianparrilla.remote.source.CurrencyRemoteDataSourceImpl
+import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -7,10 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
-const val TIME_OUT = 30L
-
-val remoteModule = module {
+val remoteCurrencyModule = module {
 
     single {
         val logging = HttpLoggingInterceptor()
@@ -23,20 +26,20 @@ val remoteModule = module {
         httpClient.addInterceptor(logging)
 
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL_CURRENCY)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build()
     }
 
-    //factory { provideMarvelAPI(get()) }
+    factory { provideCurrencyApi(get()) }
 
-    //factory<MarvelRemoteDataSource> {
-    //    MarvelRemoteDataSourceImpl(
-    //        get()
-    //    )
-    //}
+    factory<CurrencyRemoteDataSource> {
+        CurrencyRemoteDataSourceImpl(
+            get()
+        )
+    }
 }
 
-//fun provideMarvelAPI(retrofit: Retrofit): MarvelApiService =
-//    retrofit.create(MarvelApiService::class.java)
+fun provideCurrencyApi(retrofit: Retrofit): CurrencyApiService =
+    retrofit.create(CurrencyApiService::class.java)

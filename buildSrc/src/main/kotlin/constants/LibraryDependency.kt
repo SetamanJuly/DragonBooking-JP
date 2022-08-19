@@ -2,6 +2,7 @@ object LibraryDependency {
     object Version {
         const val KOIN = "3.2.0"
         const val ARROW = "1.0.1"
+        const val ROOM = "2.4.3"
 
 
         const val RECYCLER_LIB = "1.2.0-beta01"
@@ -13,7 +14,6 @@ object LibraryDependency {
         const val MATERIAL_LIB = "1.3.0"
         const val CONSTRAINT = "2.1.0-alpha2"
         const val CROP = "2.8.0"
-        const val ROOM = "2.3.0-beta01"
         const val RETROFIT = "2.9.0"
         const val RETROFIT_INTERCEPTOR = "4.9.1"
         const val GSON = "2.8.6:"

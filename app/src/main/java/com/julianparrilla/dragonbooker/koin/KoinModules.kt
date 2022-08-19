@@ -3,16 +3,18 @@ package com.julianparrilla.dragonbooker.koin
 import com.julianparrilla.cache.koin.databaseModule
 import com.julianparrilla.data.koin.dataModule
 import com.julianparrilla.domain.koin.useCaseModule
-import com.julianparrilla.remote.koin.remoteModule
+import com.julianparrilla.remote.koin.remoteCurrencyModule
+import com.julianparrilla.remote.koin.remoteDragonsModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import org.koin.core.module.Module
 
 @FlowPreview
 @ExperimentalCoroutinesApi
 val koinModules = listOf(
     databaseModule,
-    remoteModule,
+    asyncModule,
+    remoteCurrencyModule,
+    remoteDragonsModule,
     dataModule,
     useCaseModule,
     fragmentModule,

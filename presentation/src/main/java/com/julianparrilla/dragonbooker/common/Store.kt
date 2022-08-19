@@ -1,6 +1,7 @@
 package com.julianparrilla.dragonbooker.common
 
 import com.julianparrilla.domain.utils.WithScope
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -59,6 +60,9 @@ abstract class Store<A : Action, B : State>(initialState: B) :
             }
         }
     }
+
+    fun cancel(): Unit =
+        coroutineContext.cancelChildren()
 
     private fun B.state() {
         state.value = this
