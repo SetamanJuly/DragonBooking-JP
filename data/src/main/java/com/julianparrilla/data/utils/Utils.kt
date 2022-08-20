@@ -22,10 +22,35 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
         }
 
         if (it.second.isNotEmpty()) {
-            query += " AND"
+            if (containsConditions) {
+                query += " AND"
+            } else {
+                query += " WHERE"
+                containsConditions = true
+            }
             query += " inbound_destination=?"
-            containsConditions = true
             args.add(it.second)
+        }
+    }
+
+    priceRange?.let {
+        if (containsConditions) {
+            query += " AND"
+        } else {
+            query += " WHERE"
+            containsConditions = true
+        }
+
+        if(it.first != null && it.second != null) {
+            query += " price BETWEEN ? AND ?"
+            args.add("${it.first}")
+            args.add("${it.second}")
+        } else if (it.second != null) {
+            query += " price <=?"
+            args.add("${it.second}")
+        } else {
+            query += " price >=?"
+            args.add("${it.first ?: 0.0}")
         }
     }
 
@@ -39,19 +64,6 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
             PriceSort.ASC -> query += " ASC"
             else -> query += " DESC"
         }
-    }
-
-    if (priceRange != null) {
-        if (containsConditions) {
-            query += " AND"
-        } else {
-            query += " WHERE"
-            containsConditions = true
-        }
-
-        query += " BETWEEN ? AND ?"
-        args.add("${priceRange!!.first}")
-        args.add("${priceRange!!.second}")
     }
 
     query += ""

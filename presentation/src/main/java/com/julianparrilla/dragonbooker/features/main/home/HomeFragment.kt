@@ -1,6 +1,7 @@
 package com.julianparrilla.dragonbooker.features.main.home
 
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import com.julianparrilla.dragonbooker.R
 import com.julianparrilla.dragonbooker.base.BaseFragment
 import com.julianparrilla.dragonbooker.common.ViewStore
@@ -10,7 +11,6 @@ import com.julianparrilla.dragonbooker.utils.viewBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.android.inject
-
 
 @FlowPreview
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -58,6 +58,14 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
                     onDestinationChanged(list.getItemAtPosition(i) as String)
                 }
             }
+        }
+
+        binding.etPriceRangeTo.addTextChangedListener {
+            onMaxChanged(it.toString())
+        }
+
+        binding.etPriceRangeFrom.addTextChangedListener {
+            onMinChanged(it.toString())
         }
 
         binding.btnSearch onClick {

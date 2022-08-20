@@ -1,5 +1,6 @@
 package com.julianparrilla.dragonbooker.features.main.home
 
+import android.util.Log
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.model.PriceSort
 import com.julianparrilla.domain.usecase.GetAllDragonsUseCase
@@ -28,6 +29,12 @@ class HomeStore(
                 onOriginChanged = {
                     HomeOriginChanged(it).handle()
                 },
+                onMaxChanged = {
+                    HomeMaxValueChanged(it).handle()
+                },
+                onMinChanged = {
+                    HomeMinValueChanged(it).handle()
+                },
                 onSearchClicked = {
                     HomeSearchClicked.handle()
                 }
@@ -46,6 +53,12 @@ class HomeStore(
             )
             is HomeOriginChanged -> currentState.copy(
                 originSelected = origin
+            )
+            is HomeMaxValueChanged -> currentState.copy(
+                maxAmountSelected = max
+            )
+            is HomeMinValueChanged -> currentState.copy(
+                minAmountSelected = min
             )
         }
 
@@ -82,12 +95,16 @@ class HomeStore(
                                 originDestination = Pair(
                                     currentState.originSelected ?: "",
                                     currentState.destinationSelected ?: ""
+                                ),
+                                priceRange = Pair(
+                                    currentState.minAmountSelected?.toDouble(),
+                                    currentState.maxAmountSelected?.toDouble()
                                 )
                             )
                         )
                     },
                     success = {
-                        it
+                        Log.e("SETAMAN", ""+it.results.size)
                     },
                     error = {
                         it
