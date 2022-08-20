@@ -6,8 +6,10 @@ import com.julianparrilla.dragonbooker.R
 import com.julianparrilla.dragonbooker.base.BaseFragment
 import com.julianparrilla.dragonbooker.common.ViewStore
 import com.julianparrilla.dragonbooker.databinding.FragmentHomeBinding
+import com.julianparrilla.dragonbooker.utils.findNavController
 import com.julianparrilla.dragonbooker.utils.onClick
 import com.julianparrilla.dragonbooker.utils.viewBinding
+import com.julianparrilla.dragonbooker.utils.visibleOrGone
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.android.inject
@@ -24,6 +26,7 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
 
     override fun onCreate() {
         store.onCreate(this)
+        store.navigator = findNavController()
 
         binding.cbOriginAnywhere.setOnCheckedChangeListener { _, b ->
             binding.actvOrigin.isEnabled = !b
@@ -35,6 +38,7 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
             if (b) binding.actvDestination.setText("")
         }
 
+        binding.rbDesc.isChecked = true
     }
 
     override fun onDestroy() {
@@ -43,7 +47,7 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
     }
 
     override fun HomeState.render() {
-
+        binding.lLoading.visibleOrGone(loading)
         originDestination?.let {
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, it.first).also {
                 binding.actvOrigin.setAdapter(it)
@@ -58,6 +62,10 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
                     onDestinationChanged(list.getItemAtPosition(i) as String)
                 }
             }
+        }
+
+        binding.rgPrice.setOnCheckedChangeListener { _, i ->
+            onPriceSortChanged(i == R.id.rbAsc)
         }
 
         binding.etPriceRangeTo.addTextChangedListener {

@@ -2,6 +2,7 @@ package com.julianparrilla.remote.model
 
 import com.google.gson.annotations.SerializedName
 import com.julianparrilla.data.entity.BoundModel
+import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
 import com.julianparrilla.data.entity.ResultsModel
 
@@ -27,14 +28,16 @@ data class Bound(
     @SerializedName("origin") val origin: String
 )
 
-fun DragonBookerResponse.toData(): DragonsModel =
+fun DragonBookerResponse.toData(currencyModel: HashMap<String, CurrencyModel>): DragonsModel =
     DragonsModel(
         results = results.map {
             ResultsModel(
                 inbound = it.inbound.toData(),
                 outbound = it.outbound.toData(),
-                price = it.price,
-                currency = it.currency,
+                priceOriginal = it.price,
+                currencyOriginal = it.currency,
+                price = (currencyModel[it.currency]?.exchangeRate ?: 1.0) * it.price,
+                currency = currencyModel[it.currency]?.currency ?: "",
             )
         }
     )

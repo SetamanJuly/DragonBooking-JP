@@ -1,12 +1,12 @@
 package com.julianparrilla.dragonbooker.features.main.home
 
-import android.util.Log
+import android.os.Bundle
+import androidx.navigation.NavController
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.model.PriceSort
-import com.julianparrilla.domain.usecase.GetAllDragonsUseCase
-import com.julianparrilla.domain.usecase.GetFilteredDragonsUseCase
-import com.julianparrilla.domain.usecase.GetOriginAndDestinationUseCase
+import com.julianparrilla.domain.usecase.*
 import com.julianparrilla.domain.utils.WithScope
+import com.julianparrilla.dragonbooker.R
 import com.julianparrilla.dragonbooker.common.Store
 
 class HomeStore(
@@ -14,7 +14,10 @@ class HomeStore(
     val getAllDragonsUseCase: GetAllDragonsUseCase,
     val getFilteredDragonsUseCase: GetFilteredDragonsUseCase,
     val getOriginAndDestinationUseCase: GetOriginAndDestinationUseCase,
+    val getObtainConversionsUseCase: GetObtainConversionsUseCase
 ) : WithScope by withScope, Store<HomeAction, HomeState>(HomeState()) {
+
+    lateinit var navigator: NavController
 
     override fun onInit() {
         HomeInitAction.handle()
@@ -23,6 +26,7 @@ class HomeStore(
     override fun HomeAction.reduce(currentState: HomeState): HomeState =
         when (this) {
             HomeInitAction -> currentState.copy(
+                loading = true,
                 onDestinationChanged = {
                     HomeDestinationChanged(it).handle()
                 },
@@ -37,36 +41,55 @@ class HomeStore(
                 },
                 onSearchClicked = {
                     HomeSearchClicked.handle()
+                },
+                onPriceSortChanged = {
+                    HomePriceSortChanged(if (it) PriceSort.ASC else PriceSort.DESC).handle()
                 }
             )
-            HomeSearchClicked,
-            HomeErrorAction -> currentState
             is HomeSuccessOriginDestinationAction -> currentState.copy(
-                loading = false,
                 originDestination = data
             )
-            is HomeSuccessAction -> currentState.copy(
-                loading = false
-            )
             is HomeDestinationChanged -> currentState.copy(
-                destinationSelected = destination
+                destinationSelected = destination.ifEmpty { null }
             )
             is HomeOriginChanged -> currentState.copy(
-                originSelected = origin
+                originSelected = origin.ifEmpty { null }
             )
             is HomeMaxValueChanged -> currentState.copy(
-                maxAmountSelected = max
+                maxAmountSelected = max.ifEmpty { null }
             )
             is HomeMinValueChanged -> currentState.copy(
-                minAmountSelected = min
+                minAmountSelected = min.ifEmpty { null }
             )
+            is HomePriceSortChanged -> currentState.copy(
+                priceSort = priceSort
+            )
+            is HomeCoinConversionSuccess -> currentState.copy(
+                currencyState = list,
+                loading = false
+            )
+            is HomeSuccessAction,
+            is HomeObtainAllCoins,
+            HomeSearchClicked,
+            HomeErrorAction -> currentState
         }
 
     override fun HomeAction.sideEffects(currentState: HomeState) {
         when (this) {
             is HomeInitAction -> {
                 launchIOSafe(
-                    f = { getAllDragonsUseCase() },
+                    f = { getObtainConversionsUseCase(arrayListOf("EUR", "USD", "GBP", "JPY"), "EUR") },
+                    success = {
+                        HomeCoinConversionSuccess(it).handle()
+                    },
+                    error = {
+                        it
+                    }
+                )
+            }
+            is HomeCoinConversionSuccess -> {
+                launchIOSafe(
+                    f = { getAllDragonsUseCase(list) },
                     success = {
                         HomeSuccessAction(it).handle()
                     },
@@ -91,7 +114,7 @@ class HomeStore(
                     f = {
                         getFilteredDragonsUseCase(
                             DragonFilterParams(
-                                priceSort = PriceSort.ASC,
+                                priceSort = currentState.priceSort,
                                 originDestination = Pair(
                                     currentState.originSelected ?: "",
                                     currentState.destinationSelected ?: ""
@@ -100,11 +123,17 @@ class HomeStore(
                                     currentState.minAmountSelected?.toDouble(),
                                     currentState.maxAmountSelected?.toDouble()
                                 )
-                            )
+                            ),
+                            currentState.currencyState
                         )
                     },
                     success = {
-                        Log.e("SETAMAN", ""+it.results.size)
+                        launchIO {
+                            val bundle = Bundle()
+                            bundle.putSerializable(BUNDLE_DATA, it)
+                            bundle.putSerializable(BUNDLE_CONVERSION, currentState.currencyState)
+                            navigator.navigate(R.id.action_homeFragment_to_registerFragment, bundle)
+                        }
                     },
                     error = {
                         it
@@ -115,4 +144,8 @@ class HomeStore(
         }
     }
 
+    companion object {
+        const val BUNDLE_DATA = "DATA"
+        const val BUNDLE_CONVERSION = "CONVERSION"
+    }
 }

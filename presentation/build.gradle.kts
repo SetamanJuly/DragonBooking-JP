@@ -44,6 +44,7 @@ dependencies {
     implementation(LibraryDependency.MATERIAL_DIALOG)
     implementation(LibraryDependency.CORE_KTX)
     implementation(LibraryDependency.GLIDE)
+    implementation(LibraryDependency.LOTTIE)
     implementation(LibraryDependency.LIVE_DATA_RUNTIME)
     implementation(LibraryDependency.LIVE_DATA_KTX)
     implementation(LibraryDependency.OKHTTP)

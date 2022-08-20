@@ -8,6 +8,7 @@ import com.julianparrilla.remote.source.CurrencyRemoteDataSourceImpl
 import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 val remoteCurrencyModule = module {
 
-    single {
+    single (named(CURRENCY_TAG)){
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
@@ -32,7 +33,7 @@ val remoteCurrencyModule = module {
             .build()
     }
 
-    factory { provideCurrencyApi(get()) }
+    factory { provideCurrencyApi(get(named(CURRENCY_TAG))) }
 
     factory<CurrencyRemoteDataSource> {
         CurrencyRemoteDataSourceImpl(

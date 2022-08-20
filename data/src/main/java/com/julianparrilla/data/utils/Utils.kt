@@ -1,6 +1,8 @@
 package com.julianparrilla.data.utils
 
 import arrow.core.Either
+import com.julianparrilla.data.entity.CurrencyModel
+import com.julianparrilla.domain.model.CurrencyDataState
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.model.NetworkError
 import com.julianparrilla.domain.model.PriceSort
@@ -42,7 +44,7 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
         }
 
         if(it.first != null && it.second != null) {
-            query += " price BETWEEN ? AND ?"
+            query += " price BETWEEN ? and ?"
             args.add("${it.first}")
             args.add("${it.second}")
         } else if (it.second != null) {
@@ -54,19 +56,22 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
         }
     }
 
-    if (priceSort != PriceSort.NONE) {
-        if (!containsConditions) {
-            containsConditions = true
-        }
-
-        query += " ORDER BY price"
-        when (priceSort) {
-            PriceSort.ASC -> query += " ASC"
-            else -> query += " DESC"
-        }
+    query += " ORDER BY price"
+    query += when (priceSort) {
+        PriceSort.ASC -> " ASC"
+        else -> " DESC"
     }
 
-    query += ""
-
     return Pair(query, args)
+}
+
+fun CurrencyDataState.toHashMap() : HashMap<String, CurrencyModel> {
+    val hashMap = hashMapOf<String, CurrencyModel>()
+    items.map {
+        hashMap.put(it.key, CurrencyModel(
+            currency = it.value.currency,
+            exchangeRate = it.value.exchangeRate
+        ))
+    }
+    return hashMap
 }

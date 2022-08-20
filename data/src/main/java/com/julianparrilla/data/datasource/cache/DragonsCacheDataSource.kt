@@ -1,5 +1,6 @@
 package com.julianparrilla.data.datasource.cache
 
+import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.utils.Return
@@ -12,6 +13,8 @@ interface DragonsCacheDataSource {
 
     suspend fun getFilteredDragons(query: Pair<String, MutableList<String>>): DragonsModel?
 
-    suspend fun getOriginAndDestinations(): Pair<List<String>, List<String>>?
+    suspend fun getOriginAndDestinations(): Pair<List<String>, List<String>>
+
+    suspend fun getAvailableCoins(): List<String>?
 
 }

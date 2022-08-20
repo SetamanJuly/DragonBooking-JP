@@ -8,7 +8,9 @@ data class ResultsModel(
     val inbound: BoundModel,
     val outbound: BoundModel,
     val price: Double,
-    val currency: String
+    val currency: String,
+    val priceOriginal: Double?,
+    val currencyOriginal: String?
 )
 
 data class BoundModel(

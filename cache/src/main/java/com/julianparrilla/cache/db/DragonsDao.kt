@@ -25,4 +25,6 @@ interface DragonsDao {
     @Query("SELECT DISTINCT outbound_origin FROM dragonBooking")
     suspend fun getDestinations(): List<String>
 
+    @Query("SELECT DISTINCT currency FROM dragonBooking")
+    suspend fun getCoins(): List<String>
 }

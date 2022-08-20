@@ -61,17 +61,19 @@
         app:layout_constraintTop_toBottomOf="@id/tvPrice">
 
         <RadioButton
+            android:id="@+id/rbAsc"
             android:layout_width="0dp"
-            android:checked="true"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Asc" />
 
         <RadioButton
+            android:id="@+id/rbDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Desc" />
+
     </RadioGroup>
 
     <TextView
@@ -119,5 +121,13 @@
         android:layout_margin="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="Search" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/l_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
