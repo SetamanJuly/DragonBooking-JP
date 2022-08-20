@@ -9,6 +9,8 @@ import com.julianparrilla.domain.utils.CACHE_TIMEOUT
 import com.julianparrilla.domain.utils.NETWORK_TIMEOUT
 import com.julianparrilla.domain.utils.Return
 import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.sendBlocking
+import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emitAll
@@ -16,10 +18,11 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 
-abstract class NetworkBoundResource<NetworkObj, CacheObj, ViewState>(
+@ExperimentalCoroutinesApi
+abstract class NetworkBoundResource<NetworkObj, ViewState>(
     private val dispatcher: CoroutineDispatcher,
     private val apiCall: (suspend () -> NetworkObj)? = null,
-    val cacheCall: (suspend () -> CacheObj?)? = null
+    private val cacheCall: (suspend () -> NetworkObj?)? = null
 ) {
     val result: Flow<Return<ViewState>> = flow {
         cacheCall?.let {
@@ -91,7 +94,7 @@ abstract class NetworkBoundResource<NetworkObj, CacheObj, ViewState>(
         return null
     }
 
-    open suspend fun handleCacheSuccess(response: CacheObj?):
+    open suspend fun handleCacheSuccess(response: NetworkObj?):
             Either<NetworkError, ViewState>? {
         return null
     }

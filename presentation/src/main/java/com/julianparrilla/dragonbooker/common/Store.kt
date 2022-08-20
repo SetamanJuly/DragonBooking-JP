@@ -1,5 +1,7 @@
 package com.julianparrilla.dragonbooker.common
 
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.julianparrilla.domain.utils.WithScope
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -56,7 +58,7 @@ abstract class Store<A : Action, B : State>(initialState: B) :
         view.run { state.state() }
         launchIO {
             state.collect {
-                Main { view.run { it.render() } }
+                IO { view.run { it.render() } }
             }
         }
     }
@@ -81,8 +83,4 @@ interface SideEffects<A : Action, B : State> {
 
 interface ActionHandler<A : Action> {
     fun A.handle()
-}
-
-interface EmptyState<A : State> {
-    fun empty(): A
 }

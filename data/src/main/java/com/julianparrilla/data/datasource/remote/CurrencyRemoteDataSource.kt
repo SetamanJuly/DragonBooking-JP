@@ -6,8 +6,8 @@ import com.julianparrilla.domain.utils.Return
 interface CurrencyRemoteDataSource {
 
     suspend fun currencyChange(
-        from: String,
+        from: List<String>,
         to: String
-    ): CurrencyModel
+    ): List<CurrencyModel>
 
 }

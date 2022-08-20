@@ -3,11 +3,9 @@ object LibraryDependency {
         const val KOIN = "3.2.0"
         const val ARROW = "1.0.1"
         const val ROOM = "2.4.3"
-
-
+        const val LOTTIE = "3.4.0"
         const val RECYCLER_LIB = "1.2.0-beta01"
         const val CARD_VIEW = "1.0.0"
-        const val SWIPE_TO_REFERESH = "1.2.0-alpha01"
         const val CORE_KTX = "1.5.0-beta01"
         const val COLLECTION_KTX = "1.2.0-alpha01"
         const val APPCOMPAT_LIB = "1.3.0-beta01"
@@ -42,6 +40,7 @@ object LibraryDependency {
     const val MATERIAL_DIALOG = "com.afollestad.material-dialogs:core:${Version.MATERIAL_DIALOG}"
     const val GLIDE = "com.github.bumptech.glide:glide:${Version.GLIDE}"
     const val GLIDE_COMPILAR = "com.github.bumptech.glide:compiler:${Version.GLIDE}"
+    const val LOTTIE = "com.airbnb.android:lottie:${Version.LOTTIE}"
 
     //KOIN
     const val KOIN = "io.insert-koin:koin-core:${Version.KOIN}"

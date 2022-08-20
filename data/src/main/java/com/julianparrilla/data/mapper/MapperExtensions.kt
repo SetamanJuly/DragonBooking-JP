@@ -3,10 +3,7 @@ package com.julianparrilla.data.mapper
 import com.julianparrilla.data.entity.BoundModel
 import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
-import com.julianparrilla.domain.model.BoundDataState
-import com.julianparrilla.domain.model.CurrencyDataState
-import com.julianparrilla.domain.model.DragonsDataState
-import com.julianparrilla.domain.model.ResultsDataState
+import com.julianparrilla.domain.model.*
 
 fun DragonsModel.toDomain(): DragonsDataState =
     DragonsDataState(
@@ -14,6 +11,8 @@ fun DragonsModel.toDomain(): DragonsDataState =
             ResultsDataState(
                 inbound = it.inbound.toDomain(),
                 outbound = it.outbound.toDomain(),
+                priceOriginal = it.priceOriginal,
+                currencyOriginal = it.currencyOriginal,
                 price = it.price,
                 currency = it.currency,
             )
@@ -32,8 +31,8 @@ fun BoundModel.toDomain(): BoundDataState =
         origin = origin,
     )
 
-fun CurrencyModel.toDomain(): CurrencyDataState =
-    CurrencyDataState(
+fun CurrencyModel.toDomain(): CurrencyItemState =
+    CurrencyItemState(
         currency = currency,
         exchangeRate = exchangeRate,
     )

@@ -11,8 +11,14 @@ data class CachedResponseAllDragons(
     @ColumnInfo(name = "id")
     var id: Int? = null,
 
+    @ColumnInfo(name = "price_original")
+    var priceOriginal: Double,
+
     @ColumnInfo(name = "price")
     var price: Double,
+
+    @ColumnInfo(name = "currency_original")
+    var currencyOriginal: String,
 
     @ColumnInfo(name = "currency")
     var currency: String,

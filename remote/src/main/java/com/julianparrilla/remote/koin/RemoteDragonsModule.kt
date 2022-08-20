@@ -5,6 +5,7 @@ import com.julianparrilla.remote.service.DragonsApiService
 import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 val remoteDragonsModule = module {
 
-    single {
+    single(named(DRAGONS_TAG)) {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 
@@ -29,7 +30,7 @@ val remoteDragonsModule = module {
             .build()
     }
 
-    factory { provideDragonsApi(get()) }
+    factory { provideDragonsApi(get(named(DRAGONS_TAG))) }
 
     factory<DragonsRemoteDataSource> {
         DragonsRemoteDataSourceImpl(
