@@ -10,4 +10,5 @@ dependencies {
 
     // DOMAIN Module
     implementation(project(ModulesDependency.DOMAIN))
+    addTestDependencies()
 }

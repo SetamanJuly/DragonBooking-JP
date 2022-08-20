@@ -78,7 +78,7 @@ class HomeStore(
         when (this) {
             is HomeInitAction -> {
                 launchIOSafe(
-                    f = { getObtainConversionsUseCase(arrayListOf("EUR", "USD", "GBP", "JPY"), "EUR") },
+                    f = { getObtainConversionsUseCase(AVAILABLE_CURRENCIES, "EUR") },
                     success = {
                         HomeCoinConversionSuccess(it).handle()
                     },
@@ -147,5 +147,6 @@ class HomeStore(
     companion object {
         const val BUNDLE_DATA = "DATA"
         const val BUNDLE_CONVERSION = "CONVERSION"
+        val AVAILABLE_CURRENCIES = arrayListOf("EUR", "USD", "GBP", "JPY")
     }
 }

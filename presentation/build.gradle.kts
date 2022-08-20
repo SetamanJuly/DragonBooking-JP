@@ -54,4 +54,5 @@ dependencies {
     kapt(LibraryDependency.LIVE_DATA_COMPILER)
     implementation(project(ModulesDependency.DOMAIN))
     addTestDependencies()
+    addAndroidTestDependencies()
 }
