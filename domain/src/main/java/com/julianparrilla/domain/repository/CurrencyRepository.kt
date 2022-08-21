@@ -11,5 +11,4 @@ interface CurrencyRepository {
         from: List<String>,
         to: String
     ): Flow<Either<NetworkError, CurrencyDataState>>
-
 }

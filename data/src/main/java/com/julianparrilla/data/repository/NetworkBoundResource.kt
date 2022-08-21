@@ -8,13 +8,13 @@ import com.julianparrilla.domain.model.*
 import com.julianparrilla.domain.utils.CACHE_TIMEOUT
 import com.julianparrilla.domain.utils.NETWORK_TIMEOUT
 import com.julianparrilla.domain.utils.Return
+import java.io.IOException
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import java.io.IOException
 
 @ExperimentalCoroutinesApi
 abstract class NetworkBoundResource<NetworkObj, ViewState>(
@@ -88,14 +88,14 @@ abstract class NetworkBoundResource<NetworkObj, ViewState>(
         throwable.response()?.errorBody()?.string() ?: NetworkUnknownError.error
 
     open suspend fun handleNetworkSuccess(response: NetworkObj):
-            Either<NetworkError, ViewState>? {
-        return null
-    }
+        Either<NetworkError, ViewState>? {
+            return null
+        }
 
     open suspend fun handleCacheSuccess(response: NetworkObj?):
-            Either<NetworkError, ViewState>? {
-        return null
-    }
+        Either<NetworkError, ViewState>? {
+            return null
+        }
 
     open suspend fun updateCache(networkObject: NetworkObj) {
         // Waiting for override

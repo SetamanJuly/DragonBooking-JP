@@ -23,7 +23,7 @@ data class CachedResponseAllDragons(
     @ColumnInfo(name = "currency")
     var currency: String,
 
-    //INBOUND
+    // INBOUND
     @ColumnInfo(name = "inbound_airline")
     var inboundAirline: String,
 
@@ -48,7 +48,7 @@ data class CachedResponseAllDragons(
     @ColumnInfo(name = "inbound_origin")
     var inboundOrigin: String,
 
-    //OUTBOUND
+    // OUTBOUND
     @ColumnInfo(name = "outbound_airline")
     var outboundAirline: String,
 
@@ -73,4 +73,4 @@ data class CachedResponseAllDragons(
     @ColumnInfo(name = "outbound_origin")
     var outboundOrigin: String,
 
-    )
+)

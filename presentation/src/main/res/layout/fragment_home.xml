@@ -10,16 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="24dp"
+        android:layout_margin="@dimen/dimen_24"
         android:completionThreshold="1"
-        android:hint="Origin"
+        android:hint="@string/origin"
         android:inputType="text" />
 
     <CheckBox
         android:id="@+id/cbOriginAnywhere"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Anywhere"
+        android:text="@string/anywhere"
         app:layout_constraintTop_toBottomOf="@id/actvOrigin"
         app:layout_constraintStart_toStartOf="@id/actvOrigin"
         app:layout_constraintEnd_toEndOf="@id/actvOrigin" />
@@ -29,16 +29,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cbOriginAnywhere"
-        android:layout_margin="24dp"
+        android:layout_margin="@dimen/dimen_24"
         android:completionThreshold="1"
-        android:hint="Destination"
+        android:hint="@string/destination"
         android:inputType="text" />
 
     <CheckBox
         android:id="@+id/cbDestinationAnywhere"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Anywhere"
+        android:text="@string/anywhere"
         app:layout_constraintTop_toBottomOf="@id/actvDestination"
         app:layout_constraintStart_toStartOf="@id/actvDestination"
         app:layout_constraintEnd_toEndOf="@id/actvDestination" />
@@ -47,16 +47,16 @@
         android:id="@+id/tvPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/dimen_24"
         app:layout_constraintTop_toBottomOf="@id/cbDestinationAnywhere"
         app:layout_constraintStart_toStartOf="@id/cbDestinationAnywhere"
-        android:text="Price sort" />
+        android:text="@string/price_sort" />
 
     <RadioGroup
         android:id="@+id/rgPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="@dimen/dimen_24"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/tvPrice">
 
@@ -65,14 +65,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Asc" />
+            android:text="@string/asc_price" />
 
         <RadioButton
             android:id="@+id/rbDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Desc" />
+            android:text="@string/desc_price" />
 
     </RadioGroup>
 
@@ -80,17 +80,17 @@
         android:id="@+id/tvPriceRange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/dimen_24"
         app:layout_constraintTop_toBottomOf="@id/rgPrice"
         app:layout_constraintStart_toStartOf="@id/rgPrice"
-        android:text="Price range" />
+        android:text="@string/price_range" />
 
     <EditText
         android:id="@+id/etPriceRangeFrom"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="From"
-        android:layout_marginEnd="8dp"
+        android:hint="@string/from"
+        android:layout_marginEnd="@dimen/dimen_8"
         app:layout_constraintTop_toBottomOf="@id/tvPriceRange"
         app:layout_constraintStart_toStartOf="@id/tvPriceRange"
         app:layout_constraintEnd_toStartOf="@id/etPriceRangeTo" />
@@ -99,8 +99,8 @@
         android:id="@+id/etPriceRangeTo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="To"
-        android:layout_marginStart="8dp"
+        android:hint="@string/to"
+        android:layout_marginStart="@dimen/dimen_8"
         app:layout_constraintTop_toBottomOf="@id/tvPriceRange"
         app:layout_constraintStart_toEndOf="@id/etPriceRangeFrom"
         app:layout_constraintEnd_toEndOf="@id/rgPrice" />
@@ -109,7 +109,7 @@
         android:id="@+id/cbPriceTo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="No limit"
+        android:text="@string/no_limit"
         app:layout_constraintTop_toBottomOf="@id/etPriceRangeTo"
         app:layout_constraintStart_toStartOf="@id/etPriceRangeTo"
         app:layout_constraintEnd_toEndOf="@id/etPriceRangeTo" />
@@ -117,10 +117,10 @@
     <Button
         android:id="@+id/btnSearch"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="24dp"
+        android:layout_height="@dimen/height_button"
+        android:layout_margin="@dimen/dimen_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Search" />
+        android:text="@string/search" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/l_loading"

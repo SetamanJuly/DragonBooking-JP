@@ -35,5 +35,4 @@ class ResultStore(
         }
 
     override fun ResultAction.sideEffects(currentState: ResultState) {}
-
 }

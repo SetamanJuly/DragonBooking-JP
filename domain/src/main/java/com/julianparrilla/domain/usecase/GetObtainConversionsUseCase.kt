@@ -9,5 +9,4 @@ class GetObtainConversionsUseCase(private val repository: CurrencyRepository) {
 
     suspend operator fun invoke(list: List<String>, to: String): Return<CurrencyDataState> =
         repository.getCurrencyConversion(list, to).last()
-
 }

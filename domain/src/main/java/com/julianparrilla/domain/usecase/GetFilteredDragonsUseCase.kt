@@ -14,5 +14,4 @@ class GetFilteredDragonsUseCase(private val repository: DragonsRepository) {
         currency: CurrencyDataState
     ): Return<DragonsDataState> =
         repository.getFilteredData(params, currency).last()
-
 }

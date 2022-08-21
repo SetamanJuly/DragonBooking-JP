@@ -16,7 +16,5 @@ class MainStore(
     }
 
     override fun MainAction.sideEffects(currentState: MainState) {
-
     }
-
 }

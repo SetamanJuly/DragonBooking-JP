@@ -13,5 +13,4 @@ class CurrencyRemoteDataSourceImpl(
         from.map {
             currencyApiService.getCurrencyConversion(it, to).toData()
         }
-
 }

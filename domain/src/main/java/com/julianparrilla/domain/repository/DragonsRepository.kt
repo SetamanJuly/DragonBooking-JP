@@ -18,5 +18,4 @@ interface DragonsRepository {
     fun getOriginAndDestinations(): Flow<Return<Pair<List<String>, List<String>>>>
 
     fun getAvailableCoins(): Flow<Return<List<String>>>
-
 }

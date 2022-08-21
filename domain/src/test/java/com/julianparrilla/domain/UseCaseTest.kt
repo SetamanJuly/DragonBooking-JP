@@ -20,5 +20,4 @@ class UseCaseTest {
         coEvery { getAllDragonsUseCase(CurrencyDataState(hashMapOf())) }
         verify { }
     }
-
 }

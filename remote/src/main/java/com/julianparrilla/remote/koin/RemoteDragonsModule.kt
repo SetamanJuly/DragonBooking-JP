@@ -3,13 +3,13 @@ package com.julianparrilla.remote.koin
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
 import com.julianparrilla.remote.service.DragonsApiService
 import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
+import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 val remoteDragonsModule = module {
 

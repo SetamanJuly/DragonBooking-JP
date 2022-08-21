@@ -5,7 +5,6 @@ import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.julianparrilla.dragonbooker.R
 
-
 fun Activity.displayToast(msg: String?) {
     Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

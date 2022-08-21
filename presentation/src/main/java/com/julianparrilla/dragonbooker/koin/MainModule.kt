@@ -12,5 +12,4 @@ val mainModule = module {
 
     factory { MainStore(get()) }
     factory { MainActivity() }
-
 }

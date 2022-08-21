@@ -28,5 +28,4 @@ class MainActivity : BaseActivity(), ViewStore<MainState> {
     override fun MainState.render() {
         binding.progressBar.visibleOrGone(loading)
     }
-
 }

@@ -26,5 +26,4 @@ abstract class BaseFragment : Fragment() {
 
     protected abstract fun getLayout(): Int
     protected abstract fun onCreate()
-
 }

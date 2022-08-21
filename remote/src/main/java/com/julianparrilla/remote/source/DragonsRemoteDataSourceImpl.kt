@@ -12,6 +12,4 @@ class DragonsRemoteDataSourceImpl(
 
     override suspend fun allDragons(currencyModel: HashMap<String, CurrencyModel>): DragonsModel =
         dragonsApiService.getDragonList().toData(currencyModel)
-
-
 }
