@@ -1,4 +1,4 @@
-package com.julianparrilla.presentation
+package com.julianparrilla.dragonbooker
 
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import com.julianparrilla.dragonbooker.R
 import com.julianparrilla.dragonbooker.features.main.MainActivity
 import com.julianparrilla.dragonbooker.features.main.MainStore
 import org.hamcrest.Description
@@ -41,18 +40,12 @@ class MainNavigationAndroidTest {
 
     @Before
     fun setUp() {
-        mainStore = Mockito.mock(MainStore::class.java)
         moduleMocked = module {
             single {
                 mainStore
             }
         }
         loadKoinModules(moduleMocked)
-    }
-
-    @After
-    fun after() {
-        unloadKoinModules(moduleMocked)
     }
 
     @Test
