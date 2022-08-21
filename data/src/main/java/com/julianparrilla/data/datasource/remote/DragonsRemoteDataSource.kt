@@ -6,5 +6,4 @@ import com.julianparrilla.data.entity.DragonsModel
 interface DragonsRemoteDataSource {
 
     suspend fun allDragons(currencyModel: HashMap<String, CurrencyModel>): DragonsModel
-
 }

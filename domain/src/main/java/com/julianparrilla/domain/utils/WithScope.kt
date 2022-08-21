@@ -4,10 +4,10 @@ import arrow.core.Either
 import arrow.core.computations.EitherEffect
 import arrow.core.computations.either
 import com.julianparrilla.domain.model.NetworkError
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlin.coroutines.CoroutineContext
 
 @Suppress("FunctionName")
 interface WithScope : CoroutineScope {

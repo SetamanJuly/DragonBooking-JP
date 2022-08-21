@@ -14,6 +14,22 @@
     <string name="error_something_went_wrong">Some thing went wrong</string>
     <string name="error_unknown">Unknown error</string>
 
+    //App
+    <string name="splash_title">GRACIAS\nA\nDIOS\nNO\nSOY\n✨DISEÑADOR✨\n\n\nLA APLICACIÓN\nJulian Parrilla</string>
+    <string name="total_items">Total items: %d</string>
+    <string name="origin">Origin</string>
+    <string name="anywhere">Anywhere</string>
+    <string name="destination">Destination</string>
+    <string name="price_sort">Price sort</string>
+    <string name="asc_price">Asc</string>
+    <string name="desc_price">Desc</string>
+    <string name="price_range">Price range</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="no_limit">No limit</string>
+    <string name="search">Search</string>
+    <string name="other_search">Other search</string>
+
 </resources>
 
 

@@ -37,7 +37,6 @@ android.packagingOptions {
     resources.excludes.add("**/kotlin/**")
 }
 
-
 dependencies {
     implementation(LibraryDependency.CONSTRAINT)
     implementation(LibraryDependency.APPCOMPAT)

@@ -11,6 +11,7 @@ import com.julianparrilla.domain.usecase.GetOriginAndDestinationUseCase
 import com.julianparrilla.domain.utils.WithScope
 import com.julianparrilla.dragonbooker.R
 import com.julianparrilla.dragonbooker.common.Store
+import org.jetbrains.kotlin.utils.doNothing
 
 class HomeStore(
     withScope: WithScope,
@@ -47,6 +48,9 @@ class HomeStore(
                 },
                 onPriceSortChanged = {
                     HomePriceSortChanged(if (it) PriceSort.ASC else PriceSort.DESC).handle()
+                },
+                onUpdateView = {
+                    HomeUpdateView.handle()
                 }
             )
             is HomeSuccessOriginDestinationAction -> currentState.copy(
@@ -71,6 +75,7 @@ class HomeStore(
                 currencyState = list,
                 loading = false
             )
+            HomeUpdateView,
             is HomeSuccessAction,
             is HomeObtainAllCoins,
             HomeSearchClicked,
@@ -86,7 +91,7 @@ class HomeStore(
                         HomeCoinConversionSuccess(it).handle()
                     },
                     error = {
-                        it
+                        HomeErrorAction.handle()
                     }
                 )
             }
@@ -97,7 +102,7 @@ class HomeStore(
                         HomeSuccessAction(it).handle()
                     },
                     error = {
-                        it
+                        HomeErrorAction.handle()
                     }
                 )
             }
@@ -108,7 +113,7 @@ class HomeStore(
                         HomeSuccessOriginDestinationAction(it).handle()
                     },
                     error = {
-                        it
+                        HomeErrorAction.handle()
                     }
                 )
             }
@@ -139,11 +144,13 @@ class HomeStore(
                         }
                     },
                     error = {
-                        it
+                        HomeErrorAction.handle()
                     }
                 )
             }
-            else -> {}
+            else -> {
+                doNothing()
+            }
         }
     }
 

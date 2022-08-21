@@ -13,5 +13,4 @@ interface DragonsCacheDataSource {
     suspend fun getOriginAndDestinations(): Pair<List<String>, List<String>>
 
     suspend fun getAvailableCoins(): List<String>?
-
 }

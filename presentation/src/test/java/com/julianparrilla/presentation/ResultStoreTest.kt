@@ -45,5 +45,4 @@ class ResultStoreTest : ScopeMock {
 
         assertTrue(store.getActions().last() is ResultInitAction)
     }
-
 }

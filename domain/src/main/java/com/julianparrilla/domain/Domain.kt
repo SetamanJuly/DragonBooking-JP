@@ -1,4 +1,3 @@
 package com.julianparrilla.domain
 
-class Domain {
-}
+class Domain

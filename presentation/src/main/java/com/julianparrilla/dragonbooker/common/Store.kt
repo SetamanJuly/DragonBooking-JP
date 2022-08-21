@@ -10,11 +10,9 @@ interface State
 
 interface ViewStore<B : State> {
     fun B.render() {
-
     }
 
     fun StateFlow<B>.state() {
-
     }
 }
 

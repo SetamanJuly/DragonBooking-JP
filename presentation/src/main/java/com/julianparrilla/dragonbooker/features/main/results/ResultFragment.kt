@@ -37,7 +37,7 @@ class ResultFragment : BaseFragment(), ViewStore<ResultState> {
 
     override fun ResultState.render() {
         data?.let {
-            binding.tvTotal.text = "Total: ${it.results.size}"
+            binding.tvTotal.text = resources.getString(R.string.total_items, it.results.size)
             binding.rvDragons.adapter = DragonItemAdapter(it.results, currencies!!)
         }
 
@@ -45,5 +45,4 @@ class ResultFragment : BaseFragment(), ViewStore<ResultState> {
             requireActivity().onBackPressed()
         }
     }
-
 }

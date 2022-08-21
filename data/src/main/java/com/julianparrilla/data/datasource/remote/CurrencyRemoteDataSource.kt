@@ -8,5 +8,4 @@ interface CurrencyRemoteDataSource {
         from: List<String>,
         to: String
     ): List<CurrencyModel>
-
 }

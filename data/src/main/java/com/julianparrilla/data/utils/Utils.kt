@@ -69,7 +69,8 @@ fun CurrencyDataState.toHashMap(): HashMap<String, CurrencyModel> {
     val hashMap = hashMapOf<String, CurrencyModel>()
     items.map {
         hashMap.put(
-            it.key, CurrencyModel(
+            it.key,
+            CurrencyModel(
                 currency = it.value.currency,
                 exchangeRate = it.value.exchangeRate
             )

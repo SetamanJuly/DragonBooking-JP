@@ -132,7 +132,8 @@ class MainNavigationAndroidTest {
 
     companion object {
         private fun childAtPosition(
-            parentMatcher: Matcher<View>, position: Int
+            parentMatcher: Matcher<View>,
+            position: Int
         ): Matcher<View> {
             return object : TypeSafeMatcher<View>() {
                 override fun describeTo(description: Description) {
@@ -142,11 +143,12 @@ class MainNavigationAndroidTest {
 
                 public override fun matchesSafely(view: View): Boolean {
                     val parent = view.parent
-                    return (parent is ViewGroup && parentMatcher.matches(parent)
-                            && view == parent.getChildAt(position))
+                    return (
+                        parent is ViewGroup && parentMatcher.matches(parent) &&
+                            view == parent.getChildAt(position)
+                        )
                 }
             }
         }
     }
-
 }

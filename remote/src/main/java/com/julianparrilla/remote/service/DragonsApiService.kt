@@ -7,5 +7,4 @@ interface DragonsApiService {
 
     @GET("/")
     suspend fun getDragonList(): DragonBookerResponse
-
 }

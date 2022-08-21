@@ -10,5 +10,4 @@ class GetAllDragonsUseCase(private val repository: DragonsRepository) {
 
     suspend operator fun invoke(currency: CurrencyDataState): Return<DragonsDataState> =
         repository.getAllDragons(currency).last()
-
 }

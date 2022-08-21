@@ -4,5 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorAccent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/splash_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/title_size" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

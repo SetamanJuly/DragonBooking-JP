@@ -27,17 +27,6 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
     override fun onCreate() {
         store.onCreate(this)
         store.navigator = findNavController()
-
-        binding.cbOriginAnywhere.setOnCheckedChangeListener { _, b ->
-            binding.actvOrigin.isEnabled = !b
-            if (b) binding.actvOrigin.setText("")
-        }
-
-        binding.cbDestinationAnywhere.setOnCheckedChangeListener { _, b ->
-            binding.actvDestination.isEnabled = !b
-            if (b) binding.actvDestination.setText("")
-        }
-
         binding.rbDesc.isChecked = true
     }
 
@@ -48,11 +37,13 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
 
     override fun HomeState.render() {
         binding.lLoading.visibleOrGone(loading)
+        checkEnabledButton()
         originDestination?.let {
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, it.first).also {
                 binding.actvOrigin.setAdapter(it)
                 binding.actvOrigin.setOnItemClickListener { list, _, i, _ ->
                     onOriginChanged(list.getItemAtPosition(i) as String)
+                    checkEnabledButton()
                 }
             }
 
@@ -60,6 +51,7 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
                 binding.actvDestination.setAdapter(it)
                 binding.actvDestination.setOnItemClickListener { list, _, i, _ ->
                     onDestinationChanged(list.getItemAtPosition(i) as String)
+                    checkEnabledButton()
                 }
             }
         }
@@ -80,5 +72,38 @@ class HomeFragment : BaseFragment(), ViewStore<HomeState> {
             onSearchClicked()
         }
 
+        binding.cbOriginAnywhere.setOnCheckedChangeListener { _, b ->
+            binding.actvOrigin.isEnabled = !b
+            if (b) {
+                binding.actvOrigin.setText("")
+                onOriginChanged("")
+            }
+            checkEnabledButton()
+        }
+
+        binding.cbDestinationAnywhere.setOnCheckedChangeListener { _, b ->
+            binding.actvDestination.isEnabled = !b
+            if (b) {
+                binding.actvDestination.setText("")
+                onDestinationChanged("")
+            }
+            checkEnabledButton()
+        }
+
+        binding.cbPriceTo.setOnCheckedChangeListener { _, b ->
+            binding.etPriceRangeTo.isEnabled = !b
+            if (b) {
+                onMaxChanged("")
+                binding.etPriceRangeTo.setText("")
+            }
+            checkEnabledButton()
+        }
+    }
+
+    private fun checkEnabledButton() {
+        binding.btnSearch.isEnabled =
+            (binding.actvOrigin.text.isNotEmpty() || binding.cbOriginAnywhere.isChecked) &&
+            (binding.actvDestination.text.isNotEmpty() || binding.cbDestinationAnywhere.isChecked) &&
+            (binding.etPriceRangeTo.text.isNotEmpty() || binding.cbPriceTo.isChecked)
     }
 }

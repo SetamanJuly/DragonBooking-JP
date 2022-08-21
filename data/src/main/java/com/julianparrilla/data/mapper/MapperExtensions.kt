@@ -39,4 +39,3 @@ fun CurrencyModel.toDomain(): CurrencyItemState =
         currency = currency,
         exchangeRate = exchangeRate,
     )
-

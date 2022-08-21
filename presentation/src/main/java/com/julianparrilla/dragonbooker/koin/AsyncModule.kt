@@ -1,9 +1,9 @@
 package com.julianparrilla.dragonbooker.koin
 
 import com.julianparrilla.domain.utils.WithScope
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.*
 import org.koin.dsl.module
-import kotlin.coroutines.CoroutineContext
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -18,5 +18,4 @@ val asyncModule = module {
             override val jobs: MutableList<Job> = mutableListOf()
         }
     }
-
 }

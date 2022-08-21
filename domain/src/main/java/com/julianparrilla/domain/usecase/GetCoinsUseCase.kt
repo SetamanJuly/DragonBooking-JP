@@ -6,8 +6,7 @@ import kotlinx.coroutines.flow.last
 
 class GetCoinsUseCase(private val repository: DragonsRepository) {
 
-    //USE THIS FOR FIND ALL THE COINS
+    // USE THIS FOR FIND ALL THE COINS
     suspend operator fun invoke(): Return<List<String>> =
         repository.getAvailableCoins().last()
-
 }

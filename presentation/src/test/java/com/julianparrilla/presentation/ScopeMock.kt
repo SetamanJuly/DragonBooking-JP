@@ -1,10 +1,10 @@
 package com.julianparrilla.presentation
 
 import com.julianparrilla.domain.utils.WithScope
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlin.coroutines.CoroutineContext
 
 interface ScopeMock {
     @OptIn(ExperimentalCoroutinesApi::class)

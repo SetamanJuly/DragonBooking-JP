@@ -91,6 +91,4 @@ class HomeStoreTest : ScopeMock {
 
         assertTrue(store.getActions().last() is HomeSuccessOriginDestinationAction)
     }
-
-
 }

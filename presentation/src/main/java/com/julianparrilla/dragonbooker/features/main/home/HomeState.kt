@@ -15,6 +15,7 @@ data class HomeState(
     val onMinChanged: (String) -> Unit = {},
     val onMaxChanged: (String) -> Unit = {},
     val onPriceSortChanged: (Boolean) -> Unit = {},
+    val onUpdateView: () -> Unit = {},
     val onSearchClicked: () -> Unit = {},
     val originSelected: String? = null,
     val priceSort: PriceSort = PriceSort.NONE,
@@ -37,5 +38,6 @@ data class HomeMinValueChanged(val min: String) : HomeAction()
 data class HomeMaxValueChanged(val max: String) : HomeAction()
 data class HomeObtainAllCoins(val list: List<String>) : HomeAction()
 data class HomeCoinConversionSuccess(val list: CurrencyDataState) : HomeAction()
+object HomeUpdateView : HomeAction()
 object HomeSearchClicked : HomeAction()
 object HomeErrorAction : HomeAction()

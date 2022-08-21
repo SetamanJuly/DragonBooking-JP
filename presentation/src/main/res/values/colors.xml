@@ -5,5 +5,7 @@
     <color name="colorPrimaryDark">@color/colorAccent</color>
     <color name="colorAccent">@android:color/black</color>
     <color name="default_background_color">#EEEEEE</color>
+    <color name="white">#fff</color>
+    <color name="background">#D1D1D1</color>
 
 </resources>
