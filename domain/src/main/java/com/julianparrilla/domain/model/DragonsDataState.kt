@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class DragonsDataState(
     val results: List<ResultsDataState>
-): Serializable
+) : Serializable
 
 data class ResultsDataState(
     val inbound: BoundDataState,
@@ -13,7 +13,7 @@ data class ResultsDataState(
     val currency: String,
     val priceOriginal: Double?,
     val currencyOriginal: String?
-): Serializable
+) : Serializable
 
 data class BoundDataState(
     val airline: String,
@@ -24,4 +24,4 @@ data class BoundDataState(
     val departureTime: String,
     val destination: String,
     val origin: String
-): Serializable
+) : Serializable

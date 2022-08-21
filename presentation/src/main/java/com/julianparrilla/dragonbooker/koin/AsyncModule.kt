@@ -9,11 +9,13 @@ import kotlin.coroutines.CoroutineContext
 @ExperimentalCoroutinesApi
 val asyncModule = module {
 
+    val job = SupervisorJob()
+
     factory<WithScope> {
         object : WithScope {
-            override val io: CoroutineContext = Dispatchers.Main.immediate + SupervisorJob()
-            override val jobs: MutableList<Job> =  mutableListOf()
-            override val coroutineContext: CoroutineContext =  Dispatchers.IO + SupervisorJob()
+            override val io: CoroutineContext = Dispatchers.Main.immediate + job
+            override val coroutineContext: CoroutineContext = Dispatchers.IO + job
+            override val jobs: MutableList<Job> = mutableListOf()
         }
     }
 

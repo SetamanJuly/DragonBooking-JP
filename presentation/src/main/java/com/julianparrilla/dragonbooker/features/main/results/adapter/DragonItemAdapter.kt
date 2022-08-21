@@ -27,7 +27,10 @@ class DragonItemAdapter(
 
     override fun getItemCount(): Int = userItems.size
 
-    class ViewHolder(private val binding: ItemDragonBinding, private val currencyDataState: CurrencyDataState) :
+    class ViewHolder(
+        private val binding: ItemDragonBinding,
+        private val currencyDataState: CurrencyDataState
+    ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindItems(item: ResultsDataState) {
             binding.ivOriginAirline.loadCrop(item.inbound.airlineImage)

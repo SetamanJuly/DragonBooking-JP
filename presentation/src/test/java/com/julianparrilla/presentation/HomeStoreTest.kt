@@ -1,14 +1,17 @@
 package com.julianparrilla.presentation
 
+import arrow.core.left
 import arrow.core.right
 import com.julianparrilla.domain.model.CurrencyDataState
+import com.julianparrilla.domain.model.DragonsDataState
+import com.julianparrilla.domain.model.NetworkUnknownError
 import com.julianparrilla.domain.usecase.GetAllDragonsUseCase
 import com.julianparrilla.domain.usecase.GetFilteredDragonsUseCase
 import com.julianparrilla.domain.usecase.GetObtainConversionsUseCase
 import com.julianparrilla.domain.usecase.GetOriginAndDestinationUseCase
-import com.julianparrilla.dragonbooker.features.main.home.HomeCoinConversionSuccess
 import com.julianparrilla.dragonbooker.features.main.home.HomeInitAction
 import com.julianparrilla.dragonbooker.features.main.home.HomeStore
+import com.julianparrilla.dragonbooker.features.main.home.HomeSuccessOriginDestinationAction
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -48,14 +51,29 @@ class HomeStoreTest : ScopeMock {
     }
 
     @Test
-    fun `initial check action`() {
+    fun `initial check action if something fails`() {
+        coEvery {
+            getObtainConversionsUseCase(
+                HomeStore.AVAILABLE_CURRENCIES,
+                "EUR"
+            )
+        } returns NetworkUnknownError.left()
+
         store.onInit()
 
         assertTrue(store.getActions().last() is HomeInitAction)
     }
 
     @Test
-    fun `onInit check next step`() {
+    fun `onInit check until destinations`() {
+        coEvery {
+            getAllDragonsUseCase(
+                CurrencyDataState(
+                    hashMapOf()
+                )
+            )
+        } returns DragonsDataState(arrayListOf()).right()
+
         coEvery {
             getObtainConversionsUseCase(
                 HomeStore.AVAILABLE_CURRENCIES,
@@ -65,9 +83,13 @@ class HomeStoreTest : ScopeMock {
             hashMapOf()
         ).right()
 
+        coEvery {
+            getOriginAndDestinationUseCase()
+        } returns Pair(arrayListOf(""), arrayListOf("")).right()
+
         store.onInit()
 
-        assertTrue(store.getActions().last() is HomeCoinConversionSuccess)
+        assertTrue(store.getActions().last() is HomeSuccessOriginDestinationAction)
     }
 
 

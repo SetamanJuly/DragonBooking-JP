@@ -6,9 +6,11 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-inline fun <reified T : ViewBinding> Activity.viewBinding() = ActivityViewBindingDelegate(T::class.java)
+inline fun <reified T : ViewBinding> Activity.viewBinding() =
+    ActivityViewBindingDelegate(T::class.java)
 
-class ActivityViewBindingDelegate<T : ViewBinding>(private val bindingClass: Class<T>) : ReadOnlyProperty<Activity, T> {
+class ActivityViewBindingDelegate<T : ViewBinding>(private val bindingClass: Class<T>) :
+    ReadOnlyProperty<Activity, T> {
     private var binding: T? = null
 
     @Suppress("UNCHECKED_CAST")

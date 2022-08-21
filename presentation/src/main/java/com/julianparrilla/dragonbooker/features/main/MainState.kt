@@ -5,6 +5,6 @@ import com.julianparrilla.dragonbooker.common.State
 
 data class MainState(
     val loading: Boolean = false
-): State
+) : State
 
-object MainAction: Action
+object MainAction : Action

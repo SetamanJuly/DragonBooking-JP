@@ -1,11 +1,8 @@
 package com.julianparrilla.remote.koin
 
 import com.julianparrilla.data.datasource.remote.CurrencyRemoteDataSource
-import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
 import com.julianparrilla.remote.service.CurrencyApiService
-import com.julianparrilla.remote.service.DragonsApiService
 import com.julianparrilla.remote.source.CurrencyRemoteDataSourceImpl
-import com.julianparrilla.remote.source.DragonsRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -16,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 val remoteCurrencyModule = module {
 
-    single (named(CURRENCY_TAG)){
+    single(named(CURRENCY_TAG)) {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
 

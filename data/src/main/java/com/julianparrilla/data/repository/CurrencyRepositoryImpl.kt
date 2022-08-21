@@ -34,7 +34,7 @@ class CurrencyRepositoryImpl(
                     }
                 ) {
                 override suspend fun handleNetworkSuccess(response: List<CurrencyModel>): Return<CurrencyDataState> {
-                    val hashItems =  hashMapOf<String, CurrencyItemState>()
+                    val hashItems = hashMapOf<String, CurrencyItemState>()
                     response.mapIndexed { index, currencyModel ->
                         hashItems.put(from[index], currencyModel.toDomain())
                     }

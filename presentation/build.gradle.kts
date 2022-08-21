@@ -32,6 +32,12 @@ android.buildFeatures {
     viewBinding = true
 }
 
+android.packagingOptions {
+    resources.excludes.add("META-INF/**")
+    resources.excludes.add("**/kotlin/**")
+}
+
+
 dependencies {
     implementation(LibraryDependency.CONSTRAINT)
     implementation(LibraryDependency.APPCOMPAT)
@@ -48,8 +54,6 @@ dependencies {
     implementation(LibraryDependency.LIVE_DATA_RUNTIME)
     implementation(LibraryDependency.LIVE_DATA_KTX)
     implementation(LibraryDependency.OKHTTP)
-    androidTestImplementation("androidx.test:rules:1.4.1-alpha07")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.0-alpha07")
     kapt(LibraryDependency.GLIDE_COMPILAR)
     kapt(LibraryDependency.LIVE_DATA_COMPILER)
     implementation(project(ModulesDependency.DOMAIN))

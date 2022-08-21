@@ -6,8 +6,8 @@ import com.julianparrilla.domain.model.CurrencyDataState
 import com.julianparrilla.domain.model.CurrencyItemState
 import com.julianparrilla.domain.model.DragonFilterParams
 import com.julianparrilla.domain.model.PriceSort
+import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.junit.Assert.*
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -17,7 +17,8 @@ class UtilsQueryTest {
     @Test
     fun `should get a correct query for the following main params`() {
 
-        val queryExpectedOne = "SELECT * FROM dragonBooking WHERE price BETWEEN ? and ? ORDER BY price ASC"
+        val queryExpectedOne =
+            "SELECT * FROM dragonBooking WHERE price BETWEEN ? and ? ORDER BY price ASC"
         val queryFilterOne = DragonFilterParams(
             priceSort = PriceSort.ASC,
             priceRange = Pair(0.0, 49.0),
@@ -33,7 +34,8 @@ class UtilsQueryTest {
         ).toQuery()
         assertEquals(queryExpectedTwo, queryFilterTwo.first)
 
-        val queryExpectedThree = "SELECT * FROM dragonBooking WHERE inbound_origin=? AND inbound_destination=? AND price <=? ORDER BY price DESC"
+        val queryExpectedThree =
+            "SELECT * FROM dragonBooking WHERE inbound_origin=? AND inbound_destination=? AND price <=? ORDER BY price DESC"
         val queryFilterThree = DragonFilterParams(
             priceSort = PriceSort.DESC,
             priceRange = Pair(null, 49.0),
@@ -45,7 +47,8 @@ class UtilsQueryTest {
         val queryFilterFour = DragonFilterParams().toQuery()
         assertEquals(queryExpectedFour, queryFilterFour.first)
 
-        val queryExpectedFive = "SELECT * FROM dragonBooking WHERE inbound_origin=? AND price <=? ORDER BY price DESC"
+        val queryExpectedFive =
+            "SELECT * FROM dragonBooking WHERE inbound_origin=? AND price <=? ORDER BY price DESC"
         val queryFilterFive = DragonFilterParams(
             priceSort = PriceSort.NONE,
             priceRange = Pair(null, 49.0),

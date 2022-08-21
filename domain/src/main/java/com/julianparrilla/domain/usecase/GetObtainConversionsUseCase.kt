@@ -2,7 +2,6 @@ package com.julianparrilla.domain.usecase
 
 import com.julianparrilla.domain.model.CurrencyDataState
 import com.julianparrilla.domain.repository.CurrencyRepository
-import com.julianparrilla.domain.repository.DragonsRepository
 import com.julianparrilla.domain.utils.Return
 import kotlinx.coroutines.flow.last
 

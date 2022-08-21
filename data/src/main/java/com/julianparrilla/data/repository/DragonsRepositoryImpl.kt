@@ -4,19 +4,17 @@ import arrow.core.Either
 import arrow.core.right
 import com.julianparrilla.data.datasource.cache.DragonsCacheDataSource
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
-import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
 import com.julianparrilla.data.mapper.toDomain
 import com.julianparrilla.data.utils.toHashMap
 import com.julianparrilla.data.utils.toQuery
 import com.julianparrilla.domain.model.CurrencyDataState
 import com.julianparrilla.domain.model.DragonFilterParams
-import com.julianparrilla.domain.utils.Return
 import com.julianparrilla.domain.model.DragonsDataState
 import com.julianparrilla.domain.model.NetworkError
 import com.julianparrilla.domain.repository.DragonsRepository
+import com.julianparrilla.domain.utils.Return
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
@@ -54,7 +52,10 @@ class DragonsRepositoryImpl(
         )
     }
 
-    override fun getFilteredData(params: DragonFilterParams, currency: CurrencyDataState): Flow<Return<DragonsDataState>> = flow {
+    override fun getFilteredData(
+        params: DragonFilterParams,
+        currency: CurrencyDataState
+    ): Flow<Return<DragonsDataState>> = flow {
         emitAll(
             object : NetworkBoundResource<DragonsModel, DragonsDataState>(
                 IO,
@@ -71,12 +72,13 @@ class DragonsRepositoryImpl(
 
     override fun getOriginAndDestinations(): Flow<Return<Pair<List<String>, List<String>>>> = flow {
         emitAll(
-            object : NetworkBoundResource<Pair<List<String>, List<String>>, Pair<List<String>, List<String>>>(
-                IO,
-                cacheCall = {
-                    dragonsCacheDataSource.getOriginAndDestinations()
-                }
-            ) {
+            object :
+                NetworkBoundResource<Pair<List<String>, List<String>>, Pair<List<String>, List<String>>>(
+                    IO,
+                    cacheCall = {
+                        dragonsCacheDataSource.getOriginAndDestinations()
+                    }
+                ) {
                 override suspend fun handleCacheSuccess(response: Pair<List<String>, List<String>>?): Either<NetworkError, Pair<List<String>, List<String>>>? {
                     return response?.right()
                 }

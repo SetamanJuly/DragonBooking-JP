@@ -3,7 +3,6 @@ package com.julianparrilla.remote.source
 import com.julianparrilla.data.datasource.remote.DragonsRemoteDataSource
 import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
-import com.julianparrilla.data.utils.Return
 import com.julianparrilla.remote.model.toData
 import com.julianparrilla.remote.service.DragonsApiService
 

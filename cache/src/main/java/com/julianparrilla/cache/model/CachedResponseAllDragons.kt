@@ -73,4 +73,4 @@ data class CachedResponseAllDragons(
     @ColumnInfo(name = "outbound_origin")
     var outboundOrigin: String,
 
-)
+    )

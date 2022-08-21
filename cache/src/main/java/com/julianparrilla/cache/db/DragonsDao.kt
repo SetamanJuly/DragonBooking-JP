@@ -17,7 +17,7 @@ interface DragonsDao {
     suspend fun deleteAll()
 
     @RawQuery
-    suspend fun getFilteredData(query: SupportSQLiteQuery):  List<CachedResponseAllDragons>?
+    suspend fun getFilteredData(query: SupportSQLiteQuery): List<CachedResponseAllDragons>?
 
     @Query("SELECT DISTINCT inbound_origin FROM dragonBooking")
     suspend fun getOrigins(): List<String>

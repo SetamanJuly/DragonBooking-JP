@@ -26,7 +26,8 @@ class ResultFragment : BaseFragment(), ViewStore<ResultState> {
     override fun onCreate() {
         store.onCreate(this)
         store.retrievePrevData(arguments)
-        binding.rvDragons.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        binding.rvDragons.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
     }
 
     override fun onDestroy() {
