@@ -9,8 +9,6 @@ import com.julianparrilla.domain.utils.CACHE_TIMEOUT
 import com.julianparrilla.domain.utils.NETWORK_TIMEOUT
 import com.julianparrilla.domain.utils.Return
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.sendBlocking
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.emitAll

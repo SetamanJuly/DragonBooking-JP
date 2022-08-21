@@ -3,7 +3,10 @@ package com.julianparrilla.data.mapper
 import com.julianparrilla.data.entity.BoundModel
 import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
-import com.julianparrilla.domain.model.*
+import com.julianparrilla.domain.model.BoundDataState
+import com.julianparrilla.domain.model.CurrencyItemState
+import com.julianparrilla.domain.model.DragonsDataState
+import com.julianparrilla.domain.model.ResultsDataState
 
 fun DragonsModel.toDomain(): DragonsDataState =
     DragonsDataState(

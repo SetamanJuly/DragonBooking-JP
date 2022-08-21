@@ -1,6 +1,9 @@
 package com.julianparrilla.domain.utils
 
 import arrow.core.Either
+import arrow.core.computations.EitherEffect
+import arrow.core.computations.either
+import com.julianparrilla.domain.model.NetworkError
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -68,4 +71,39 @@ interface WithScope : CoroutineScope {
             jobs.add(it)
         }
 
+    fun <A> IoEither(
+        onSuccess: (A) -> Unit = {},
+        onError: (NetworkError) -> Unit = {},
+        f: suspend EitherEffect<NetworkError, *>.() -> A,
+    ): Job =
+        launchIO {
+            either<NetworkError, A> {
+                f(this)
+            }.fold({ onError(it) }, { onSuccess(it) })
+        }
+
+    fun <A> EitherEffect<NetworkError, *>.bindAsync(f: suspend () -> Either<NetworkError, A>): Deferred<A> =
+        async(io) { f().bind() }
+
+    suspend fun <A> EitherEffect<NetworkError, *>.then(f: suspend () -> Either<NetworkError, A>): Either<NetworkError, A> =
+        f()
+
+    fun cancel(): Unit =
+        coroutineContext.cancelChildren()
+
+    fun pause() {
+        jobs.onEach { it.cancel() }
+    }
+
+    fun <A> MainEither(
+        onSuccess: (A) -> Unit = {},
+        onError: (NetworkError) -> Unit = {},
+        f: suspend EitherEffect<NetworkError, *>.() -> A,
+    ) {
+        launchMain {
+            either<NetworkError, A> {
+                f(this)
+            }.fold({ onError(it) }, { onSuccess(it) })
+        }
+    }
 }

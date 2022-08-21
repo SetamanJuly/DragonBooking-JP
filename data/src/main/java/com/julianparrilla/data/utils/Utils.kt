@@ -43,7 +43,7 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
             containsConditions = true
         }
 
-        if(it.first != null && it.second != null) {
+        if (it.first != null && it.second != null) {
             query += " price BETWEEN ? and ?"
             args.add("${it.first}")
             args.add("${it.second}")
@@ -65,13 +65,15 @@ fun DragonFilterParams.toQuery(): Pair<String, MutableList<String>> {
     return Pair(query, args)
 }
 
-fun CurrencyDataState.toHashMap() : HashMap<String, CurrencyModel> {
+fun CurrencyDataState.toHashMap(): HashMap<String, CurrencyModel> {
     val hashMap = hashMapOf<String, CurrencyModel>()
     items.map {
-        hashMap.put(it.key, CurrencyModel(
-            currency = it.value.currency,
-            exchangeRate = it.value.exchangeRate
-        ))
+        hashMap.put(
+            it.key, CurrencyModel(
+                currency = it.value.currency,
+                exchangeRate = it.value.exchangeRate
+            )
+        )
     }
     return hashMap
 }

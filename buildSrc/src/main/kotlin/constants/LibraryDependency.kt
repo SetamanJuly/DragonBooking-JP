@@ -34,9 +34,11 @@ object LibraryDependency {
     const val RECYCYLER_VIEW = "androidx.recyclerview:recyclerview:${Version.RECYCLER_LIB}"
     const val CARD_VIEW = "androidx.cardview:cardview:${Version.CARD_VIEW}"
     const val CONSTRAINT = "androidx.constraintlayout:constraintlayout:${Version.CONSTRAINT}"
-    const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
+    const val NAVIGATION_FRAGMENT =
+        "androidx.navigation:navigation-fragment-ktx:${CoreVersion.NAVIGATION}"
     const val NAVIGATION_UI = "androidx.navigation:navigation-ui-ktx:${CoreVersion.NAVIGATION}"
-    const val NAVIGATION_RUNTIME = "androidx.navigation:navigation-runtime:${CoreVersion.NAVIGATION}"
+    const val NAVIGATION_RUNTIME =
+        "androidx.navigation:navigation-runtime:${CoreVersion.NAVIGATION}"
     const val MATERIAL_DIALOG = "com.afollestad.material-dialogs:core:${Version.MATERIAL_DIALOG}"
     const val GLIDE = "com.github.bumptech.glide:glide:${Version.GLIDE}"
     const val GLIDE_COMPILAR = "com.github.bumptech.glide:compiler:${Version.GLIDE}"
@@ -59,7 +61,8 @@ object LibraryDependency {
     //REMOTE
     const val RETROFIT = "com.squareup.retrofit2:retrofit:${Version.RETROFIT}"
     const val RETROFIT_CONVERTER = "com.squareup.retrofit2:converter-gson:${Version.RETROFIT}"
-    const val RETROFIT_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${Version.RETROFIT_INTERCEPTOR}"
+    const val RETROFIT_INTERCEPTOR =
+        "com.squareup.okhttp3:logging-interceptor:${Version.RETROFIT_INTERCEPTOR}"
     const val GSON = "com.google.code.gson:gson:${Version.GSON}"
 
     //COROUTINES

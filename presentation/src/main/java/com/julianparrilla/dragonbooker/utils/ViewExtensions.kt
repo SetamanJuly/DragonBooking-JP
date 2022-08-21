@@ -1,17 +1,13 @@
 package com.julianparrilla.dragonbooker.utils
 
 import android.R
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
-import java.io.File
 
 
 fun View.visible() {

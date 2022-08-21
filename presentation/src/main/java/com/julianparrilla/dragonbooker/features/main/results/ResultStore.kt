@@ -20,8 +20,8 @@ class ResultStore(
     fun retrievePrevData(arguments: Bundle?) {
         arguments?.let {
             ResultInitAction(
-                it.getSerializable(BUNDLE_DATA) as DragonsDataState,
-                it.getSerializable(BUNDLE_CONVERSION) as CurrencyDataState,
+                it.getSerializable(BUNDLE_DATA) as? DragonsDataState,
+                it.getSerializable(BUNDLE_CONVERSION) as? CurrencyDataState,
             ).handle()
         }
     }
@@ -34,8 +34,6 @@ class ResultStore(
             )
         }
 
-    override fun ResultAction.sideEffects(currentState: ResultState) {
-
-    }
+    override fun ResultAction.sideEffects(currentState: ResultState) {}
 
 }

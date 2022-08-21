@@ -1,7 +1,6 @@
 package com.julianparrilla.data.datasource.remote
 
 import com.julianparrilla.data.entity.CurrencyModel
-import com.julianparrilla.domain.utils.Return
 
 interface CurrencyRemoteDataSource {
 

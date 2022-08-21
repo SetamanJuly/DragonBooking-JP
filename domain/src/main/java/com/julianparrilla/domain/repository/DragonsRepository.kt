@@ -10,7 +10,10 @@ interface DragonsRepository {
 
     fun getAllDragons(currency: CurrencyDataState): Flow<Return<DragonsDataState>>
 
-    fun getFilteredData(params: DragonFilterParams, currency: CurrencyDataState): Flow<Return<DragonsDataState>>
+    fun getFilteredData(
+        params: DragonFilterParams,
+        currency: CurrencyDataState
+    ): Flow<Return<DragonsDataState>>
 
     fun getOriginAndDestinations(): Flow<Return<Pair<List<String>, List<String>>>>
 

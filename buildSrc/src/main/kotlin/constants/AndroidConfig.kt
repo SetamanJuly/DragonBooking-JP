@@ -9,7 +9,6 @@ object AndroidConfig {
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 }
 
-
 interface BuildType {
     companion object {
         const val RELEASE = "release"

@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface CurrencyRepository {
 
-    fun getCurrencyConversion(from: List<String>, to: String): Flow<Either<NetworkError, CurrencyDataState>>
+    fun getCurrencyConversion(
+        from: List<String>,
+        to: String
+    ): Flow<Either<NetworkError, CurrencyDataState>>
 
 }

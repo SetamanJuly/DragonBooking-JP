@@ -5,7 +5,6 @@ import com.julianparrilla.cache.db.DragonsDao
 import com.julianparrilla.cache.model.CachedResponseAllDragons
 import com.julianparrilla.data.datasource.cache.DragonsCacheDataSource
 import com.julianparrilla.data.entity.BoundModel
-import com.julianparrilla.data.entity.CurrencyModel
 import com.julianparrilla.data.entity.DragonsModel
 import com.julianparrilla.data.entity.ResultsModel
 
