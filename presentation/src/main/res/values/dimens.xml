@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_size">24sp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="height_button">40dp</dimen>
+    <dimen name="dimen_8">8dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_1">1dp</dimen>
+</resources>
