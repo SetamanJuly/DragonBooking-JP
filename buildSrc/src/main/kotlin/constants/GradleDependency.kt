@@ -5,16 +5,9 @@ object CoreVersion {
     const val KTLINT_GRADLE = "10.3.0"
 
     const val KTCLASS_EXAMPLE = "1.0"
-
-
-
-
-    
     const val KTLINT = "0.40.0"
     const val DETEKT = "1.16.0-RC1"
     const val VERSIONS_PLUGIN = "0.36.0"
-
-
     
 }
 
