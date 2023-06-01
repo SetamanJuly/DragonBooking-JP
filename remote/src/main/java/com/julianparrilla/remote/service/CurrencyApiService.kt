@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface CurrencyApiService {
     @GET("currency")
     suspend fun getCurrencyConversion(
-        @Query("from") from: String,
-        @Query("to") to: String,
+        @Query("fromCurrency") from: String,
+        @Query("toCurrency") to: String,
     ): CurrencyConverterResponse
 }

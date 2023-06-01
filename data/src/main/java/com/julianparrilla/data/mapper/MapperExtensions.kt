@@ -36,6 +36,6 @@ fun BoundModel.toDomain(): BoundDataState =
 
 fun CurrencyModel.toDomain(): CurrencyItemState =
     CurrencyItemState(
-        currency = currency,
+        currency = currencyTo,
         exchangeRate = exchangeRate,
     )

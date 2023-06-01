@@ -28,9 +28,7 @@ data class HomeState(
 sealed class HomeAction : Action
 object HomeInitAction : HomeAction()
 data class HomeSuccessAction(val data: DragonsDataState) : HomeAction()
-data class HomeSuccessOriginDestinationAction(val data: Pair<List<String>, List<String>>) :
-    HomeAction()
-
+data class HomeSuccessOriginDestinationAction(val data: Pair<List<String>, List<String>>) : HomeAction()
 data class HomeOriginChanged(val origin: String) : HomeAction()
 data class HomeDestinationChanged(val destination: String) : HomeAction()
 data class HomePriceSortChanged(val priceSort: PriceSort) : HomeAction()

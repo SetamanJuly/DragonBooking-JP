@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface DragonsApiService {
 
-    @GET("/")
+    @GET("flights")
     suspend fun getDragonList(): DragonBookerResponse
 }

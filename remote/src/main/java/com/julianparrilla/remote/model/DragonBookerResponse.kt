@@ -37,7 +37,7 @@ fun DragonBookerResponse.toData(currencyModel: HashMap<String, CurrencyModel>): 
                 priceOriginal = it.price,
                 currencyOriginal = it.currency,
                 price = (currencyModel[it.currency]?.exchangeRate ?: 1.0) * it.price,
-                currency = currencyModel[it.currency]?.currency ?: "",
+                currency = currencyModel[it.currency]?.currencyTo ?: "",
             )
         }
     )

@@ -71,7 +71,8 @@ fun CurrencyDataState.toHashMap(): HashMap<String, CurrencyModel> {
         hashMap.put(
             it.key,
             CurrencyModel(
-                currency = it.value.currency,
+                currencyTo = it.value.currency,
+                currencyFrom = it.value.currency,
                 exchangeRate = it.value.exchangeRate
             )
         )

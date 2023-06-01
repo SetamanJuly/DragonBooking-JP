@@ -14,3 +14,4 @@ data class ResultState(
 sealed class ResultAction : Action
 data class ResultInitAction(val data: DragonsDataState?, val currencies: CurrencyDataState?) :
     ResultAction()
+

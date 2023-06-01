@@ -54,32 +54,40 @@ class HomeStore(
                 }
             )
             is HomeSuccessOriginDestinationAction -> currentState.copy(
+                loading = false,
                 originDestination = data
             )
             is HomeDestinationChanged -> currentState.copy(
+                loading = false,
                 destinationSelected = destination.ifEmpty { null }
             )
             is HomeOriginChanged -> currentState.copy(
+                loading = false,
                 originSelected = origin.ifEmpty { null }
             )
             is HomeMaxValueChanged -> currentState.copy(
+                loading = false,
                 maxAmountSelected = max.ifEmpty { null }
             )
             is HomeMinValueChanged -> currentState.copy(
+                loading = false,
                 minAmountSelected = min.ifEmpty { null }
             )
             is HomePriceSortChanged -> currentState.copy(
+                loading = false,
                 priceSort = priceSort
             )
             is HomeCoinConversionSuccess -> currentState.copy(
-                currencyState = list,
-                loading = false
+                loading = false,
+                currencyState = list
             )
             HomeUpdateView,
             is HomeSuccessAction,
             is HomeObtainAllCoins,
             HomeSearchClicked,
-            HomeErrorAction -> currentState
+            HomeErrorAction -> currentState.copy(
+                loading = false
+            )
         }
 
     override fun HomeAction.sideEffects(currentState: HomeState) {
